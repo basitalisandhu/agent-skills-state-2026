@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   check-numbers:
-    name: Check the dataset and key findings
+    name: Check the dataset, key findings and tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -21,3 +21,7 @@ jobs:
           python-version: "3.12"
       - name: "Check numbers: dataset shape and README key findings against stats.json"
         run: python scripts/check_numbers.py
+      - name: Install test dependencies
+        run: python -m pip install --disable-pip-version-check pytest==9.1.1 pyyaml==6.0.3
+      - name: "Tests: run_month.py seed, sampling, aggregation and secret-count reduction"
+        run: python -m pytest -q tests

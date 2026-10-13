@@ -99,4 +99,15 @@ Those 30 are listed only in a private disclosure file (repository, file, line, r
 
 ## 8. Files
 
-In this repository: `data/dataset.csv` and `data/dataset.json` (one row per repository), `data/precision.csv`, `data/secret_rules_aggregate.csv`, `data/chart-data.csv`, `data/stats.json`, the three charts in `charts/`, and the scripts in `scripts/` (`collect.py`, `draw_sample.py`, `meta.py`, `fetch.py`, `scan.py`, `mcplint.py`, `hooknet.py`, `build.py`, `stats.py`, `charts.py`; `sample.py` and `secretsample.py` for the precision samples; `candidates.py`, `livecheck.py` and `secretfeat.py` for the private secret triage; `check_numbers.py` for CI). `scripts/README.md` explains how to rerun them.
+In this repository, for this first edition: `data/2026-10/dataset.csv` and `data/2026-10/dataset.json` (one row per repository), `data/2026-10/precision.csv`, `data/2026-10/secret_rules_aggregate.csv`, `data/2026-10/chart-data.csv`, `data/2026-10/stats.json`, the three charts in `charts/`, and the scripts in `scripts/` (`collect.py`, `draw_sample.py`, `meta.py`, `fetch.py`, `scan.py`, `mcplint.py`, `hooknet.py`, `build.py`, `stats.py`, `charts.py`; `sample.py` and `secretsample.py` for the precision samples; `candidates.py`, `livecheck.py` and `secretfeat.py` for the private secret triage; `check_numbers.py` for CI). `scripts/README.md` explains how to rerun them.
+
+## 9. Monthly runs
+
+From November 2026 the study is re-run on the 1st of each month by `.github/workflows/monthly.yml`, which calls `scripts/run_month.py --month YYYY-MM`. It follows sections 1 to 4 with these differences:
+
+- **Seed.** The sample seed is derived from the month as `YYYYMM01` (20261101 for November 2026). The October seed, 20261013, was the collection date.
+- **Token.** Search and metadata use the workflow's `GITHUB_TOKEN`. Search requests are paced about seven seconds apart and wait for the rate limit window to reset when GitHub reports it used up; request counts and waiting time are recorded in the month's `stats.json` under `run`.
+- **Tools.** The same versions as section 3: skill-scan-gate 0.2.0 at commit e53fdc8, claude-code-tooling-skills tag v0.1.1 (commit d5971fb), mcp-tools-lint 0.2.0 at commit 8540f7c, PyYAML 6.0.3.
+- **Precision is not re-measured.** Section 5 applies to every month; `data/trend.csv` marks later months "precision not re-measured". Hooks are flagged with the v3 rule but not read by hand, so `hook_network_review` is empty and the hand-verified hook count is a first-edition figure only.
+- **Secrets.** Secret-rule findings are reduced to per-rule counts in memory as soon as skill-scan-gate returns; no value, file, line or fingerprint is kept, per-repository secret columns stay out of the dataset, and no structural triage or disclosure is done. Clones are deleted once scanned and are never uploaded.
+- **Output.** `data/YYYY-MM/` holds `dataset.csv`, `dataset.json`, `stats.json` and `secret_rules_aggregate.csv`; the same files are copied to `data/` as the latest month, and a row is written to `data/trend.csv`. `scripts/check_numbers.py --month YYYY-MM` checks the month before the pull request is opened.

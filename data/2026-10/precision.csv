@@ -1,0 +1,21 @@
+rule,measure,check_type,sample_size,true_positives,precision_pct,status
+SSG607,skill allows unrestricted Bash,hand check (random; one finding per repository),10,10,100,kept
+SSG203,long encoded blob,hand check (all 9 repositories),9,9,100,kept (per-repository counts withheld)
+SSG401,MCP npm package without exact version,hand check,5,5,100,kept
+SSG403,MCP package uses latest tag,hand check,5,5,100,kept
+SSG402,MCP Python package without exact version,hand check,12,9,75,kept (false positives are uv run of the server's own project)
+SSG401+SSG402+SSG403,unpinned MCP server (combined),hand check,22,19,86,kept
+PyYAML parse,SKILL.md front matter rejected by a YAML parser,hand check,10,10,100,kept (8 of 10 caused by the description)
+yaml-unsafe (description_lint.py),value a strict YAML reader rejects,automated against PyYAML on every linted skill,38442,4623,12,flagged: replaced by the PyYAML parse
+description-too-long (description_lint.py),description over 1024 characters,automated against PyYAML-parsed length,513,470,92,kept
+description-no-use-when (description_lint.py),no when-to-use guidance,hand check,12,5,42,dropped
+broad when-to-use heuristic,no when-to-use guidance (wider phrase list),hand check (same 12),7,3,43,dropped
+SSG702,no licence file at root,automated against GitHub licence API plus 5 disagreements opened,982,968,99,kept
+SSG701,no security policy,automated against GitHub security-policy flag,2459,2420,98,kept (39 have an organisation-level policy)
+hook network v1,network use in hook commands or scripts,hand check,10,3,30,replaced by v3
+hook network v3,any network call in an agent hook,hand check (all 34 flagged repositories),34,30,88,kept
+hook network v3,outbound call to a non-local host by default,hand check (all 34 flagged repositories),34,15,44,flagged: reported only as a hand-verified count
+SSG501,private key block with key material,hand check (structure only; no values displayed),8,0,0,flagged: replaced by structural triage
+SSG502,provider token that a reviewer must act on,hand check (structure only),10,0,0,flagged: replaced by structural triage
+SSG503,hard-coded credential that a reviewer must act on,hand check (structure only),12,1,8,flagged: replaced by structural triage
+SSG405,literal secret in MCP env or headers,hand check (structure only),11,6,55,flagged: replaced by structural triage

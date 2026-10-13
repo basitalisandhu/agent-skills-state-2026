@@ -1,0 +1,92 @@
+name: Monthly index
+
+# Re-runs the study once a month and opens a pull request with data/YYYY-MM/, the latest copies in
+# data/, the new row in data/trend.csv and charts/trend.png. See "Updated monthly" in the README.
+
+on:
+  schedule:
+    - cron: "0 3 1 * *"
+  workflow_dispatch:
+    inputs:
+      month:
+        description: "Month to measure, YYYY-MM (default: the current month in UTC)"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: monthly-index
+  cancel-in-progress: false
+
+jobs:
+  run:
+    name: Measure the month and open a pull request
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+      - name: Install the pinned scanner and libraries
+        run: |
+          python -m pip install --disable-pip-version-check pyyaml==6.0.3 matplotlib==3.11.2 \
+            "skill-scan-gate @ git+https://github.com/basitalisandhu/skill-scan-gate@e53fdc85c6be03f3e74dcf842a7b6892bfbea0de"
+      - name: Choose the month
+        id: month
+        env:
+          INPUT_MONTH: ${{ inputs.month }}
+        run: |
+          m="${INPUT_MONTH:-$(date -u +%Y-%m)}"
+          if ! [[ "$m" =~ ^[0-9]{4}-(0[1-9]|1[0-2])$ ]]; then
+            echo "month must look like YYYY-MM" >&2
+            exit 1
+          fi
+          echo "month=$m" >> "$GITHUB_OUTPUT"
+      - name: "Run the pipeline: search, sample, fetch, scan, analyse"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MONTH: ${{ steps.month.outputs.month }}
+        run: python scripts/run_month.py --month "$MONTH" --work "$RUNNER_TEMP/work"
+      - name: Check the new month against its stats
+        env:
+          MONTH: ${{ steps.month.outputs.month }}
+        run: python scripts/check_numbers.py --month "$MONTH"
+      - name: Draw the trend chart
+        run: python scripts/plot_trend.py
+      - name: Write the pull request body
+        env:
+          MONTH: ${{ steps.month.outputs.month }}
+        run: |
+          python - <<'PY' > "$RUNNER_TEMP/pr-body.md"
+          import json, os
+          m = os.environ["MONTH"]
+          s = json.load(open(f"data/{m}/stats.json"))
+          r = s["run"]
+          print(f"Monthly index for {m}, collected on {r['collected_on']}.\n")
+          print(f"- Search: {r['search_requests']} code search requests, {r['search_hits']} hits, {r['pool_repos']} distinct repositories")
+          print(f"- Sample: {r['sampled']} drawn with seed {r['seed']}; {s['repos']} scanned; fetch status {r['fetch_status']}")
+          for k in ("no_security_md", "unpinned_mcp", "no_licence_file", "unrestricted_bash_repos", "yaml_reject_repos"):
+              print(f"- {k}: {s[k]}")
+          print(f"- Secret rules fired in {r['secret_rule_repos']} repositories (counts only, nothing triaged or named)")
+          print(f"\n{r['precision']}. Hooks are flagged automatically, not read by hand.")
+          print("\nReview before merging: CI does not run on pull requests opened by GITHUB_TOKEN; check_numbers.py already ran in the job.")
+          PY
+      - name: Open or update the pull request
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          branch: monthly/${{ steps.month.outputs.month }}
+          delete-branch: true
+          commit-message: "Monthly index: ${{ steps.month.outputs.month }}"
+          title: "Monthly index: ${{ steps.month.outputs.month }}"
+          body-path: ${{ runner.temp }}/pr-body.md
+          add-paths: |
+            data/**
+            charts/trend.png

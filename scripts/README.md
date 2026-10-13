@@ -55,10 +55,24 @@ Three inputs come from reading findings by hand, as described in `METHOD.md`:
 - `out/precision.csv`: the precision table. `sample.py RULE K SEED` and `secretsample.py RULE K SEED` print a random sample of findings to judge, one per repository; secret values are never printed.
 - `raw/secret_triage.json`: the structural secret triage. `candidates.py` writes `raw/secret_candidates.json`; `livecheck.py` reads it as `raw/secret_candidates2.json` after review and writes `raw/secret_triage.json`. Neither prints a secret value. `build.py` uses only the total from this file; the file itself, which names repositories, must stay private.
 
+## Monthly run
+
+`run_month.py` runs every step above for one month in one command, with the pinned tool versions, and writes `data/YYYY-MM/`, the latest copies in `data/` and a row of `data/trend.csv`. It clones the two tool repositories into its working folder if they are missing; skill-scan-gate must be installed (`pip install "skill-scan-gate @ git+https://github.com/basitalisandhu/skill-scan-gate@e53fdc85c6be03f3e74dcf842a7b6892bfbea0de"`).
+
+```sh
+export GITHUB_TOKEN=...                              # never printed or written by the script
+python scripts/run_month.py --month 2026-11 --limit 30   # dry run: 4 search requests, 30 repositories, temporary output
+python scripts/run_month.py --month 2026-11              # full run, as the monthly workflow does
+python scripts/check_numbers.py --month 2026-11
+python scripts/plot_trend.py                         # charts/trend.png from data/trend.csv
+```
+
+Its pure parts are tested in `tests/test_run_month.py` (`python -m pytest -q tests`).
+
 ## Checking the published numbers
 
 ```sh
 python3 scripts/check_numbers.py
 ```
 
-It checks that `data/dataset.csv` and `data/dataset.json` have the row count in `data/stats.json`, the columns the analysis needs and none of the withheld secret-rule columns, and that every number in the README's "Key findings" list matches `data/stats.json`. CI runs it on every push and pull request.
+For every month folder and for the latest copies in `data/`, it checks that `dataset.csv` and `dataset.json` have the row count in `stats.json`, the columns the analysis needs and none of the withheld secret-rule columns, and that the month's row in `data/trend.csv` matches. It also checks that the top-level files are copies of the latest month and that every number in the README's "Key findings" list matches `data/2026-10/stats.json`. CI runs it, and the tests, on every push and pull request.

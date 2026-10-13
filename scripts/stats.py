@@ -6,7 +6,7 @@ n = len(R)
 sk = [r for r in R if I(r["n_skill_md"]) > 0]
 hk = [r for r in R if I(r["n_hooks"]) > 0]
 mc = [r for r in R if I(r["n_mcp_stdio"]) > 0]
-def pc(a, b): return f"{a}/{b} ({100*a/b:.1f}%)"
+def pc(a, b): return f"{a}/{b} ({100*a/b:.1f}%)" if b else f"{a}/0 (0.0%)"
 out = {}
 out["repos"] = n
 out["repos_with_skills"] = len(sk)
@@ -16,11 +16,11 @@ out["has_server_json"] = sum(B(r["has_server_json"]) for r in R)
 out["has_mcp_json"] = sum(B(r["has_mcp_json"]) for r in R)
 out["repos_with_hooks"] = len(hk); out["repos_with_stdio_mcp"] = len(mc)
 counts = sorted((I(r["n_skill_md"]) for r in sk), reverse=True)
-out["skill_md_total"] = sum(counts); out["skill_md_median_per_repo"] = statistics.median(counts)
+out["skill_md_total"] = sum(counts); out["skill_md_median_per_repo"] = statistics.median(counts) if counts else 0
 top = counts[: max(1, len(counts)//100)]
-out["share_skill_md_in_top_1pct_repos"] = f"{100*sum(top)/sum(counts):.1f}% in {len(top)} repos"
+out["share_skill_md_in_top_1pct_repos"] = f"{100*sum(top)/max(1, sum(counts)):.1f}% in {len(top)} repos"
 out["owner_org"] = sum(r["owner_type"] == "Organization" for r in R)
-st = sorted(I(r["stars"]) for r in R); out["stars_median"] = statistics.median(st); out["repos_100plus_stars"] = sum(s >= 100 for s in st)
+st = sorted(I(r["stars"]) for r in R); out["stars_median"] = statistics.median(st) if st else 0; out["repos_100plus_stars"] = sum(s >= 100 for s in st)
 out["created_2026"] = sum((r["created_at"] or "").startswith("2026") for r in R)
 out["unpinned_mcp"] = pc(sum(B(r["any_unpinned_mcp"]) for r in mc), len(mc))
 out["unpinned_mcp_latest"] = pc(sum(I(r["SSG403"]) > 0 for r in mc), len(mc))
@@ -51,8 +51,9 @@ bands = [("0", 0, 0), ("1-9", 1, 9), ("10-99", 10, 99), ("100+", 100, 10**9)]
 c2 = []
 for name, lo, hi in bands:
     g = [r for r in R if lo <= I(r["stars"]) <= hi]
-    c2.append({"band": name, "repos": len(g), "no_security_md_pct": round(100*sum(B(r["no_security_md"]) for r in g)/len(g), 1),
-               "no_licence_pct": round(100*sum(B(r["no_licence_file"]) for r in g)/len(g), 1),
+    ng = max(1, len(g))  # a band can be empty in a small dry run
+    c2.append({"band": name, "repos": len(g), "no_security_md_pct": round(100*sum(B(r["no_security_md"]) for r in g)/ng, 1),
+               "no_licence_pct": round(100*sum(B(r["no_licence_file"]) for r in g)/ng, 1),
                "mcp_repos": sum(I(r["n_mcp_stdio"]) > 0 for r in g),
                "unpinned_mcp_pct": round(100*sum(B(r["any_unpinned_mcp"]) for r in g if I(r["n_mcp_stdio"]) > 0)/max(1, sum(I(r["n_mcp_stdio"]) > 0 for r in g)), 1)})
 out["chart2"] = c2

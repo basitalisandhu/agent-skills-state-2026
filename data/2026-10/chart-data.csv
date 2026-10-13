@@ -1,0 +1,35 @@
+chart,row,numerator,denominator,percent
+chart1,A hook calls a non-local host (hand-verified),13,373,3.5
+chart1,"A skill description is over 1,024 characters",146,2621,5.6
+chart1,A SKILL.md front matter fails YAML parsing,330,2621,12.6
+chart1,A SKILL.md has no front matter,346,2621,13.2
+chart1,A skill allows unrestricted Bash,407,2621,15.5
+chart1,No licence file at the root,982,2999,32.7
+chart1,Stdio MCP server not pinned to a version,159,346,46.0
+chart1,No SECURITY.md in the repository,2459,2999,82.0
+chart2,No SECURITY.md | stars 0,,984,88.2
+chart2,No SECURITY.md | stars 1-9,,707,77.9
+chart2,No SECURITY.md | stars 10-99,,874,81.5
+chart2,No SECURITY.md | stars 100+,,434,75.6
+chart2,No licence file | stars 0,,984,53.7
+chart2,No licence file | stars 1-9,,707,33.8
+chart2,No licence file | stars 10-99,,874,16.4
+chart2,No licence file | stars 100+,,434,16.6
+chart2,Unpinned MCP (of repos with stdio MCP) | stars 0,,116,43.1
+chart2,Unpinned MCP (of repos with stdio MCP) | stars 1-9,,108,43.5
+chart2,Unpinned MCP (of repos with stdio MCP) | stars 10-99,,77,46.8
+chart2,Unpinned MCP (of repos with stdio MCP) | stars 100+,,45,57.8
+chart3,SSG607 unrestricted Bash,10,10,100
+chart3,Unpinned MCP (401+402+403),19,22,86
+chart3,YAML parse failure (PyYAML),10,10,100
+chart3,SSG702 no licence file,968,982,99
+chart3,SSG701 no security policy,2420,2459,98
+chart3,"Description over 1,024 chars",470,513,92
+chart3,"Hook network call, any host (v3)",30,34,88
+chart3,Hook call to non-local host (v3),15,34,44
+chart3,Missing 'Use when' (linter),5,12,42
+chart3,yaml-unsafe (linter),4623,38442,12
+chart3,SSG405 secret in MCP env,6,11,55
+chart3,SSG503 hard-coded credential,1,12,8
+chart3,SSG502 provider token,0,10,0
+chart3,SSG501 private key block,0,8,0

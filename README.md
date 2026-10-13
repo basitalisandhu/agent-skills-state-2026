@@ -2,6 +2,8 @@
 
 *Muhammad Basit Ali, 13 October 2026. Dataset, method and scripts are in this repository. Data and text: CC BY 4.0. Code: MIT.*
 
+*This is the first edition. The scan is re-run every month and each month's data is added alongside; see [Updated monthly](#updated-monthly).*
+
 Agent skills, plugin marketplaces and MCP servers are now installed the way browser extensions once were: someone finds a repository, copies a line into a config file and the agent gains new instructions, new shell access or a new process that starts with every session. We wanted to know what that supply looks like on the ground, measured rather than guessed. So we took a random sample of 2,999 public GitHub repositories that ship a `SKILL.md`, a plugin or marketplace manifest, or an MCP `server.json`, scanned them with open-source tools, and hand-checked the scanners before trusting them.
 
 ## Key findings
@@ -12,7 +14,19 @@ Agent skills, plugin marketplaces and MCP servers are now installed the way brow
 - **The whole shell:** 407 of 2,621 (15.5%) repositories with skills give at least one skill unscoped `Bash`, 10,073 declarations in all.
 - **Skill headers that do not parse:** in 330 of 2,621 (12.6%) repositories with skills, at least one `SKILL.md` has front matter a standard YAML parser rejects; that is 4,761 of 336,285 (1.4%) files.
 
-Every number in this list is checked against [`data/stats.json`](data/stats.json) in CI by [`scripts/check_numbers.py`](scripts/check_numbers.py).
+Every number in this list is checked against [`data/2026-10/stats.json`](data/2026-10/stats.json) in CI by [`scripts/check_numbers.py`](scripts/check_numbers.py).
+
+## Updated monthly
+
+This study is a monthly index. On the 1st of each month at 03:00 UTC a scheduled workflow ([`.github/workflows/monthly.yml`](.github/workflows/monthly.yml)) runs [`scripts/run_month.py`](scripts/run_month.py) end to end and opens a pull request with the results.
+
+- **Re-measured each month:** the same 31 code search queries, a new random sample of 3,000 repositories (seed `YYYYMM01`, so November 2026 uses 20261101), the same sparse fetch of agent configuration files only, and the same scanners at the same pinned versions (skill-scan-gate 0.2.0 at e53fdc8, claude-code-tooling-skills v0.1.1, mcp-tools-lint 0.2.0 at 8540f7c). Every share in the dataset and `stats.json` is recomputed.
+- **Not re-measured:** precision. The hand and automated precision checks were done once, for this first edition; later months reuse them and say "precision not re-measured" in the trend notes. Hooks are flagged automatically but not read by hand, and secret-rule findings are only counted, never triaged or named.
+- **Where the data lives:** each month in `data/YYYY-MM/` (`dataset.csv`, `dataset.json`, `stats.json`, `secret_rules_aggregate.csv`). This first edition is in [`data/2026-10/`](data/2026-10/), with its precision table and chart data. `data/dataset.csv`, `data/dataset.json`, `data/stats.json` and `data/secret_rules_aggregate.csv` are always copies of the latest month, so existing links keep working. [`data/trend.csv`](data/trend.csv) has one row per month with the key findings and their denominators, drawn in `charts/trend.png`.
+
+Each month is a new sample of what code search surfaces that month, so a change of a point or two is within sampling noise; look for movement that lasts.
+
+![Key findings by month](charts/trend.png)
 
 ## Charts
 
@@ -59,7 +73,7 @@ Licences improve with popularity. Security policies barely move, and pinning doe
 | Provider token (SSG502) | 10 | 0 | 0% | not used for prevalence |
 | Private key block (SSG501) | 8 | 0 | 0% | not used for prevalence |
 
-The chart data is in [`data/chart-data.csv`](data/chart-data.csv) and the full precision table in [`data/precision.csv`](data/precision.csv).
+The chart data is in [`data/2026-10/chart-data.csv`](data/2026-10/chart-data.csv) and the full precision table in [`data/2026-10/precision.csv`](data/2026-10/precision.csv).
 
 ## What we looked at
 
@@ -87,7 +101,7 @@ The MCP tool-schema check had little to work with, since a server has to run to 
 
 ## Secrets: counted, not named
 
-The secret-shaped-string rules fire in 471 of 2,999 repositories. Read by hand, almost all of those hits are documentation: secret-scanner regexes, placeholder tokens in setup guides, example API responses, deliberately poisoned research corpora. Reporting 471 as "repositories leaking secrets" would be wrong. We triaged every hit by structure, without displaying any value, and were left with 30 possible live credentials in 17 repositories. The totals per rule are in [`data/secret_rules_aggregate.csv`](data/secret_rules_aggregate.csv); the public dataset leaves out per-repository counts for the secret rules (SSG203, SSG405, SSG501, SSG502 and SSG503).
+The secret-shaped-string rules fire in 471 of 2,999 repositories. Read by hand, almost all of those hits are documentation: secret-scanner regexes, placeholder tokens in setup guides, example API responses, deliberately poisoned research corpora. Reporting 471 as "repositories leaking secrets" would be wrong. We triaged every hit by structure, without displaying any value, and were left with 30 possible live credentials in 17 repositories. The totals per rule are in [`data/2026-10/secret_rules_aggregate.csv`](data/2026-10/secret_rules_aggregate.csv); the public dataset leaves out per-repository counts for the secret rules (SSG203, SSG405, SSG501, SSG502 and SSG503).
 
 We drop the "missing when-to-use guidance" measure for a similar reason. The linter looks for the literal phrase "Use when", and in a hand check most descriptions it flagged did say when to use the skill, in other words or in another language.
 
@@ -116,24 +130,30 @@ We drop the "missing when-to-use guidance" measure for a similar reason. The lin
 2. Search with `scripts/collect.py` (about 15 minutes at the code search rate limit), draw the sample with `scripts/draw_sample.py` and seed 20261013, then run `scripts/meta.py`, `scripts/fetch.py`, `scripts/scan.py` and `scripts/mcplint.py`.
 3. Analyse with `scripts/build.py`, `scripts/stats.py` and `scripts/charts.py` to rebuild the dataset, the numbers in this report and the three charts.
 
+Or run the whole pipeline for a month in one command: `GITHUB_TOKEN=... python scripts/run_month.py --month YYYY-MM` (add `--limit 30` for a quick dry run that writes to a temporary folder).
+
 Search results change daily, so a rerun draws a different sample; the method, not the exact numbers, is what reproduces. Step-by-step commands are in [`scripts/README.md`](scripts/README.md).
 
 ## Repository layout
 
 | Path | Contents |
 |---|---|
-| `data/dataset.csv`, `data/dataset.json` | One row per repository: repository name, commit, metadata and per-rule counts (secret rules withheld) |
-| `data/stats.json` | Every headline number, as computed by `scripts/stats.py` |
-| `data/precision.csv` | Hand and automated precision checks for each rule |
-| `data/secret_rules_aggregate.csv` | Totals for the secret rules, with no per-repository breakdown |
-| `data/chart-data.csv` | The values behind the three charts |
-| `charts/` | The three charts as PNG |
-| `scripts/` | Collection, fetch, scan and analysis scripts, plus `check_numbers.py` |
+| `data/YYYY-MM/` | One folder per month; `data/2026-10/` is this first edition |
+| `data/YYYY-MM/dataset.csv`, `dataset.json` | One row per repository: repository name, commit, metadata and per-rule counts (secret rules withheld) |
+| `data/YYYY-MM/stats.json` | Every headline number, as computed by `scripts/stats.py`; later months add a `run` block (requests, seed, tool versions) |
+| `data/YYYY-MM/secret_rules_aggregate.csv` | Totals for the secret rules, with no per-repository breakdown |
+| `data/2026-10/precision.csv` | Hand and automated precision checks for each rule (first edition only) |
+| `data/2026-10/chart-data.csv` | The values behind the three charts |
+| `data/dataset.csv`, `dataset.json`, `stats.json`, `secret_rules_aggregate.csv` | Copies of the latest month; `data/precision.csv` and `data/chart-data.csv` stay the first edition's |
+| `data/trend.csv` | One row per month: key findings, denominators, seed, request counts and notes |
+| `charts/` | The three first-edition charts and `trend.png` |
+| `scripts/` | Collection, fetch, scan and analysis scripts, `run_month.py` and `plot_trend.py` for the monthly run, and `check_numbers.py` |
+| `tests/` | Tests for `run_month.py` |
 | `METHOD.md` | Full method |
 
 ## Responsible disclosure
 
-The structural triage left 30 possible live credentials in 17 repositories. The structural triage left 30 possible live credentials in 17 repositories. Before publication each owner was re-checked: 4 repositories turned out to hold documented test values or shortened examples. None of the remaining 13 had GitHub private vulnerability reporting enabled; 2 owners were contacted by email and 11 received a short public notice that names no file, line or key type and asks them to rotate the key. No repository with a possible live credential is named here, and the public dataset leaves out per-repository counts for the secret rules.
+The structural triage left 30 possible live credentials in 17 repositories. Before publication each owner was re-checked: 4 repositories turned out to hold documented test values or shortened examples. None of the remaining 13 had GitHub private vulnerability reporting enabled; 2 owners were contacted by email and 11 received a short public notice that names no file, line or key type and asks them to rotate the key. No repository with a possible live credential is named here, and the public dataset leaves out per-repository counts for the secret rules.
 
 ## How to cite
 
@@ -152,4 +172,4 @@ Cite the repository with the metadata in [`CITATION.cff`](CITATION.cff) (GitHub 
 
 ## Licence
 
-Data and text (the `data/` and `charts/` folders, this README and `METHOD.md`) are licensed under [CC BY 4.0](LICENSE-DATA). Code (the `scripts/` folder and the CI workflow) is licensed under the [MIT licence](LICENSE).
+Data and text (the `data/` and `charts/` folders, this README and `METHOD.md`) are licensed under [CC BY 4.0](LICENSE-DATA). Code (the `scripts/` and `tests/` folders and the workflows) is licensed under the [MIT licence](LICENSE).
