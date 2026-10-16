@@ -4,29 +4,13 @@
 
 *This is the first edition. The scan is re-run every month and each month's data is added alongside; see [Updated monthly](#updated-monthly).*
 
-Agent skills, plugin marketplaces and MCP servers are now installed the way browser extensions once were: someone finds a repository, copies a line into a config file and the agent gains new instructions, new shell access or a new process that starts with every session. We wanted to know what that supply looks like on the ground, measured rather than guessed. So we took a random sample of 2,999 public GitHub repositories that ship a `SKILL.md`, a plugin or marketplace manifest, or an MCP `server.json`, scanned them with open-source tools, and hand-checked the scanners before trusting them.
-
 ## Key findings
 
-- **No way to report a vulnerability:** 2,459 of 2,999 (82.0%) repositories have no `SECURITY.md`. Among the 434 with 100 or more stars it is still 75.6%.
-- **MCP servers that can change under you:** 159 of 346 (46.0%) repositories that configure a local MCP server start at least one with no pinned version; 63 of 346 (18.2%) ask for the `latest` tag outright.
-- **No licence:** 982 of 2,999 (32.7%) have no licence file at the root.
-- **The whole shell:** 407 of 2,621 (15.5%) repositories with skills give at least one skill unscoped `Bash`, 10,073 declarations in all.
-- **Skill headers that do not parse:** in 330 of 2,621 (12.6%) repositories with skills, at least one `SKILL.md` has front matter a standard YAML parser rejects; that is 4,761 of 336,285 (1.4%) files.
-
-Every number in this list is checked against [`data/2026-10/stats.json`](data/2026-10/stats.json) in CI by [`scripts/check_numbers.py`](scripts/check_numbers.py).
-
-## Updated monthly
-
-This study is a monthly index. On the 1st of each month at 03:00 UTC a scheduled workflow ([`.github/workflows/monthly.yml`](.github/workflows/monthly.yml)) runs [`scripts/run_month.py`](scripts/run_month.py) end to end and opens a pull request with the results.
-
-- **Re-measured each month:** the same 31 code search queries, a new random sample of 3,000 repositories (seed `YYYYMM01`, so November 2026 uses 20261101), the same sparse fetch of agent configuration files only, and the same scanners at the same pinned versions (skill-scan-gate 0.2.0 at e53fdc8, claude-code-tooling-skills v0.1.1, mcp-tools-lint 0.2.0 at 8540f7c). Every share in the dataset and `stats.json` is recomputed.
-- **Not re-measured:** precision. The hand and automated precision checks were done once, for this first edition; later months reuse them and say "precision not re-measured" in the trend notes. Hooks are flagged automatically but not read by hand, and secret-rule findings are only counted, never triaged or named.
-- **Where the data lives:** each month in `data/YYYY-MM/` (`dataset.csv`, `dataset.json`, `stats.json`, `secret_rules_aggregate.csv`). This first edition is in [`data/2026-10/`](data/2026-10/), with its precision table and chart data. `data/dataset.csv`, `data/dataset.json`, `data/stats.json` and `data/secret_rules_aggregate.csv` are always copies of the latest month, so existing links keep working. [`data/trend.csv`](data/trend.csv) has one row per month with the key findings and their denominators, drawn in `charts/trend.png`.
-
-Each month is a new sample of what code search surfaces that month, so a change of a point or two is within sampling noise; look for movement that lasts.
-
-![Key findings by month](charts/trend.png)
+1. **82.0%** of repositories have no `SECURITY.md` (2,459 of 2,999). Even counting organisation-wide defaults, 80.7% have no security policy.
+2. **46.0%** of repositories with a local MCP server run at least one that is not pinned to a version (159 of 346). Of those, 100 use `npx` with no exact version, 63 ask for `latest`, and 38 run a Python package with no version.
+3. **32.7%** of repositories have no licence file at the root (982 of 2,999).
+4. **15.5%** of skill repositories declare at least one skill with unrestricted `Bash` (407 of 2,621).
+5. **12.6%** of skill repositories have at least one `SKILL.md` whose front matter fails YAML parsing (330 of 2,621).
 
 ## Follow-up report: MCP tool annotations
 
@@ -68,20 +52,28 @@ Licences improve with popularity. Security policies barely move, and pinning doe
 | No licence file (SSG702), against GitHub | 982 | 968 | 99% | yes |
 | No security policy (SSG701), against GitHub | 2,459 | 2,420 | 98% | yes |
 | Description over 1,024 characters, against parser | 513 | 470 | 92% | yes |
-| Hook makes any network call | 34 | 30 | 88% | yes |
-| Hook calls a non-local host | 34 | 15 | 44% | hand-verified count only |
-| Linter: no "Use when" sentence | 12 | 5 | 42% | dropped |
-| Linter: YAML-unsafe value, against parser | 38,442 | 4,623 | 12% | replaced by parser |
-| Literal secret in MCP config (SSG405) | 11 | 6 | 55% | not used for prevalence |
-| Hard-coded credential (SSG503) | 12 | 1 | 8% | not used for prevalence |
-| Provider token (SSG502) | 10 | 0 | 0% | not used for prevalence |
-| Private key block (SSG501) | 8 | 0 | 0% | not used for prevalence |
+| Missing 'Use when' (linter) | 10 | 1 | 10% | no |
+| yaml-unsafe (linter) | 10 | 0 | 0% | no |
+| Secret in MCP env (SSG405) | 10 | 0 | 0% | no |
+| Hard-coded credential (SSG503) | 10 | 0 | 0% | no |
+| Provider token (SSG502) | 10 | 0 | 0% | no |
+| Private key block (SSG501) | 10 | 0 | 0% | no |
 
 The chart data is in [`data/2026-10/chart-data.csv`](data/2026-10/chart-data.csv) and the full precision table in [`data/2026-10/precision.csv`](data/2026-10/precision.csv).
 
-## What we looked at
+## Updated monthly
 
-The repositories came from GitHub code search on 13 October 2026: 93 requests across 31 queries split by file size, which surfaced 7,456 distinct non-fork repositories. We drew 3,000 at random; one failed to download, leaving 2,999. This is a sample of what search surfaces, not a census of GitHub.
+This study is a monthly index. On the 1st of each month at 03:00 UTC a scheduled workflow ([`.github/workflows/monthly.yml`](.github/workflows/monthly.yml)) runs [`scripts/run_month.py`](scripts/run_month.py) end to end and opens a pull request with the results.
+
+- **Re-measured each month:** the same 31 code search queries, a new random sample of 3,000 repositories (seed `YYYYMM01`, so November 2026 uses 20261101), the same sparse fetch of agent configuration files only, and the same scanners at the same pinned versions (skill-scan-gate 0.2.0 at e53fdc8, claude-code-tooling-skills v0.1.1, mcp-tools-lint 0.2.0 at 8540f7c). Every share in the dataset and `stats.json` is recomputed.
+- **Not re-measured:** precision. The hand and automated precision checks were done once, for this first edition; later months reuse them and say "precision not re-measured" in the trend notes. Hooks are flagged automatically but not read by hand, and secret-rule findings are only counted, never triaged or named.
+- **Where the data lives:** each month in `data/YYYY-MM/` (`dataset.csv`, `dataset.json`, `stats.json`, `secret_rules_aggregate.csv`). This first edition is in [`data/2026-10/`](data/2026-10/), with its precision table and chart data. `data/dataset.csv`, `data/dataset.json`, `data/stats.json` and `data/secret_rules_aggregate.csv` are always copies of the latest month, so existing links keep working. [`data/trend.csv`](data/trend.csv) has one row per month with the key findings and their denominators, drawn in `charts/trend.png`.
+
+![Key findings by month](charts/trend.png)
+
+## Method in one paragraph
+
+We searched GitHub code search on 13 October 2026: 93 requests across 31 queries split by file size, which surfaced 7,456 distinct non-fork repositories. We drew 3,000 at random; one failed to download, leaving 2,999. This is a sample of what search surfaces, not a census of GitHub.
 
 The sample is young and mostly small: 2,512 of the 2,999 (84%) were created in 2026, the median repository has 4 stars, and 434 have 100 or more. 2,621 contain at least one skill, 336,285 `SKILL.md` files in all, with a median of 10 per repository. 1,047 ship a plugin manifest, 913 a marketplace manifest, 373 an agent hook configuration and 346 at least one MCP server that runs as a local process.
 
@@ -92,6 +84,16 @@ We fetched only the agent configuration files, ran nothing, and scanned with ski
 **1. Most repositories give no way to report a vulnerability.** 2,459 of 2,999 (82.0%) have no `SECURITY.md` in the repository; 2,420 (80.7%) have no security policy even counting organisation-wide defaults. Among repositories with 100 or more stars the figure is still 75.6% (of 434).
 
 **2. Nearly half of the MCP configurations run code that can change under you.** Of the 346 repositories that configure a local MCP server, 159 (46.0%) start at least one with no pinned version: 100 (28.9%) run an npm package through `npx` with no exact version, 63 (18.2%) ask for the `latest` tag outright, and 38 (11.0%) run a Python package without a version. Each session start can fetch whatever the package owner, or anyone who takes over the package, published last.
+
+![How unpinned local MCP servers are unpinned: 100 of 346 (28.9%) via npx with no exact version, 63 of 346 (18.2%) asking for latest, and 38 of 346 (11.0%) a Python package with no version](charts/mcp-pinning.png)
+
+| How unpinned | Repositories | Denominator | Share |
+|---|---|---|---|
+| npm package via `npx`, no exact version (SSG401) | 100 | 346 | 28.9% |
+| asks for `latest` (SSG403) | 63 | 346 | 18.2% |
+| Python package with no version (SSG402) | 38 | 346 | 11.0% |
+
+Groups overlap; the total unpinned is 159 of 346.
 
 **3. A third ship with no licence.** 982 of 2,999 (32.7%) have no licence file at the root; GitHub's own licence detection finds none for 969. For zero-star repositories it is 53.7% (of 984); for repositories with 100 or more stars, 16.6% (of 434). Without a licence, a team has no clear right to copy a skill into its own repository.
 
@@ -118,69 +120,40 @@ We drop the "missing when-to-use guidance" measure for a similar reason. The lin
 - **Lint your own skills in CI.** A colon in a description is enough to stop a host reading the skill header; it is cheap to catch and invisible until it bites.
 - **Do not trust a scanner's secret count.** In this corpus most secret-shaped strings were examples. Use the findings as a reading list, then judge them.
 
-## Limitations
-
-- **It does not show harm.** It does not show that any repository is malicious, or that any finding was exploited. It measures the presence of patterns at one commit, on the default branch, without running anything.
-- **Sample, not census.** It describes what GitHub code search surfaces, weighted towards young, small, personal projects; a curated marketplace may look better.
-- **Static only.** Tool schemas of running MCP servers, hook behaviour at run time and what a skill actually does were not observed.
-- **Partial fetch.** Only agent configuration paths were fetched, so a licence or `SECURITY.md` in an unusual place is missed; the GitHub cross-check bounds this at about 1 to 2%.
-- **Repository-level counts** treat a mirror of thousands of skills and a single skill the same. File-level counts are given where they matter.
-- **Small precision samples.** Some precision samples hold 5 to 12 findings, carry wide uncertainty and say nothing about what the scanners miss.
-- **YAML strictness.** "Fails YAML parsing" means one strict parser (PyYAML 6.0.3 `safe_load`) rejects it; an agent host may be more lenient.
-
 ## Reproduce it
 
-1. Install the tools: `pip install git+https://github.com/basitalisandhu/skill-scan-gate`, clone `basitalisandhu/claude-code-tooling-skills` and `basitalisandhu/mcp-tools-lint` (`npm ci && npm run build`), and `pip install pyyaml matplotlib`.
-2. Search with `scripts/collect.py` (about 15 minutes at the code search rate limit), draw the sample with `scripts/draw_sample.py` and seed 20261013, then run `scripts/meta.py`, `scripts/fetch.py`, `scripts/scan.py` and `scripts/mcplint.py`.
+1. Clone this repository and install the pinned scanners. See [`docs/reproducing.md`](docs/reproducing.md) for the exact commands and the time and token budget.
+2. The search and download need a GitHub token with code search. The monthly workflow uses one stored as a repository secret.
 3. Analyse with `scripts/build.py`, `scripts/stats.py` and `scripts/charts.py` to rebuild the dataset, the numbers in this report and the three charts.
-
-Or run the whole pipeline for a month in one command: `GITHUB_TOKEN=... python scripts/run_month.py --month YYYY-MM` (add `--limit 30` for a quick dry run that writes to a temporary folder).
-
-Search results change daily, so a rerun draws a different sample; the method, not the exact numbers, is what reproduces. Step-by-step commands are in [`scripts/README.md`](scripts/README.md).
 
 To explore the data instead, [`docs/querying-the-dataset.md`](docs/querying-the-dataset.md) has worked jq and Python examples with their output, and shows how to rebuild `stats.json` and the charts offline from the committed dataset. [`docs/monthly-run.md`](docs/monthly-run.md) covers the scheduled run: the token, a dry run and the time budget.
 
-## Repository layout
+## Files
 
-| Path | Contents |
+| Path | What it is |
 |---|---|
-| `data/YYYY-MM/` | One folder per month; `data/2026-10/` is this first edition |
-| `data/YYYY-MM/dataset.csv`, `dataset.json` | One row per repository: repository name, commit, metadata and per-rule counts (secret rules withheld) |
-| `data/YYYY-MM/stats.json` | Every headline number, as computed by `scripts/stats.py`; later months add a `run` block (requests, seed, tool versions) |
-| `data/YYYY-MM/secret_rules_aggregate.csv` | Totals for the secret rules, with no per-repository breakdown |
-| `data/2026-10/precision.csv` | Hand and automated precision checks for each rule (first edition only) |
+| `data/2026-10/dataset.csv` | One row per repository, with every measure and the commit we measured |
+| `data/2026-10/dataset.json` | The same, as JSON |
+| `data/2026-10/stats.json` | The shares and denominators used in this report |
+| `data/2026-10/precision.csv` | Every precision check, with its sample size and result |
 | `data/2026-10/chart-data.csv` | The values behind the three charts |
+| `data/2026-10/secret_rules_aggregate.csv` | Counts per secret rule, no values |
 | `data/dataset.csv`, `dataset.json`, `stats.json`, `secret_rules_aggregate.csv` | Copies of the latest month; `data/precision.csv` and `data/chart-data.csv` stay the first edition's |
-| `data/trend.csv` | One row per month: key findings, denominators, seed, request counts and notes |
+| `data/trend.csv` | One row per month |
 | `charts/` | The three first-edition charts and `trend.png` |
-| `scripts/` | Collection, fetch, scan and analysis scripts, `run_month.py` and `plot_trend.py` for the monthly run, and `check_numbers.py` |
-| `docs/` | The follow-up report on MCP tool annotations, worked examples of querying the dataset, and how the monthly run works |
-| `data/2026-10/annotations/` | The tool annotation report's data: `results.json` (every number, with intervals), `tools.csv` (one row per tool), `repos.csv` (one row per selected repository, with the fetched commit) and `hand-check.csv` |
-| `tests/` | Tests for `run_month.py` and for the tool annotation scripts, with fixtures |
-| `METHOD.md` | Full method |
+| `scripts/` | The search, download, scan, analysis and chart scripts |
+| `METHOD.md` | The method, including every query and the precision checks |
+| `CHANGELOG.md` | What changed between editions |
 
-## Responsible disclosure
+## Citation
 
-The structural triage left 30 possible live credentials in 17 repositories. Before publication each owner was re-checked: 4 repositories turned out to hold documented test values or shortened examples. None of the remaining 13 had GitHub private vulnerability reporting enabled; 2 owners were contacted by email and 11 received a short public notice that names no file, line or key type and asks them to rotate the key. No repository with a possible live credential is named here, and the public dataset leaves out per-repository counts for the secret rules.
+If you use the data or the method, please cite:
 
-## How to cite
+```
+Ali, M. B. (2026). The state of public agent skills and MCP servers, October 2026. https://github.com/basitalisandhu/agent-skills-state-2026
+```
 
-Cite the repository with the metadata in [`CITATION.cff`](CITATION.cff) (GitHub shows a "Cite this repository" button), or:
-
-> Ali, M. B. (2026). *The state of public agent skills and MCP servers, October 2026* (Version 1.0.0) [Data set and report]. https://github.com/basitalisandhu/agent-skills-state-2026
-
-For the follow-up report:
-
-> Ali, M. B. (2026). *Do MCP servers say which tools are safe? Tool annotations in 304 public servers, October 2026* (Version 1.1.0) [Data set and report]. https://github.com/basitalisandhu/agent-skills-state-2026/blob/main/docs/mcp-tool-annotations.md
-
-## Related tools
-
-- [skill-scan-gate](https://github.com/basitalisandhu/skill-scan-gate): CI gate for skills and plugins (the scanner used here).
-- [claude-code-tooling-skills](https://github.com/basitalisandhu/claude-code-tooling-skills): skills to review a third-party skill before installing it and to lint your own descriptions.
-- [mcp-tools-lint](https://github.com/basitalisandhu/mcp-tools-lint): lint MCP tool schemas and annotations.
-- [agent-off-switch](https://github.com/basitalisandhu/agent-off-switch): find every AI agent identity in Microsoft 365, AWS and GitHub and switch it off.
-- [ai-agent-incidents](https://github.com/basitalisandhu/ai-agent-incidents): open dataset of AI agent security incidents.
-- Docs hub with every tool and post: https://basitalisandhu.github.io/
+Or the BibTeX in [`CITATION.cff`](CITATION.cff).
 
 ## Licence
 
