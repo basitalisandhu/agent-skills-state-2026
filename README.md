@@ -28,6 +28,10 @@ Each month is a new sample of what code search surfaces that month, so a change 
 
 ![Key findings by month](charts/trend.png)
 
+## Follow-up report: MCP tool annotations
+
+**[Do MCP servers say which tools are safe?](docs/mcp-tool-annotations.md)** (16 October 2026) answers the question the first edition could not: whether MCP servers mark their tools with `readOnlyHint`, `destructiveHint`, `idempotentHint` and `openWorldHint`. It re-fetched the source of the 399 repositories in this sample that ship a `server.json`, at the commits in the dataset, and read the tool registrations without running anything. Of the 304 servers whose registrations could be read (17,688 tools in all), 188 (61.8%) annotate none of their tools and only 69 (22.7%) annotate every one. Of the 1,099 tools named for deleting, sending, paying or writing, 214 (19.5%) declare `destructiveHint: true`. Every share has its denominator and a 95% confidence interval; the data is in [`data/2026-10/annotations/`](data/2026-10/annotations/) and the scripts are `scripts/annotations_fetch.py` and `scripts/annotations.py`. No number in this first edition changes.
+
 ## Charts
 
 ![Share of repositories with each finding, from 82.0% with no SECURITY.md down to 3.5% with a hook that calls a non-local host](charts/chart1-prevalence.png)
@@ -150,8 +154,9 @@ To explore the data instead, [`docs/querying-the-dataset.md`](docs/querying-the-
 | `data/trend.csv` | One row per month: key findings, denominators, seed, request counts and notes |
 | `charts/` | The three first-edition charts and `trend.png` |
 | `scripts/` | Collection, fetch, scan and analysis scripts, `run_month.py` and `plot_trend.py` for the monthly run, and `check_numbers.py` |
-| `docs/` | Worked examples of querying the dataset, and how the monthly run works |
-| `tests/` | Tests for `run_month.py` |
+| `docs/` | The follow-up report on MCP tool annotations, worked examples of querying the dataset, and how the monthly run works |
+| `data/2026-10/annotations/` | The tool annotation report's data: `results.json` (every number, with intervals), `tools.csv` (one row per tool), `repos.csv` (one row per selected repository, with the fetched commit) and `hand-check.csv` |
+| `tests/` | Tests for `run_month.py` and for the tool annotation scripts, with fixtures |
 | `METHOD.md` | Full method |
 
 ## Responsible disclosure
@@ -163,6 +168,10 @@ The structural triage left 30 possible live credentials in 17 repositories. Befo
 Cite the repository with the metadata in [`CITATION.cff`](CITATION.cff) (GitHub shows a "Cite this repository" button), or:
 
 > Ali, M. B. (2026). *The state of public agent skills and MCP servers, October 2026* (Version 1.0.0) [Data set and report]. https://github.com/basitalisandhu/agent-skills-state-2026
+
+For the follow-up report:
+
+> Ali, M. B. (2026). *Do MCP servers say which tools are safe? Tool annotations in 304 public servers, October 2026* (Version 1.1.0) [Data set and report]. https://github.com/basitalisandhu/agent-skills-state-2026/blob/main/docs/mcp-tool-annotations.md
 
 ## Related tools
 

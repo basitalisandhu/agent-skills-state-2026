@@ -6,10 +6,17 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
-No published number or finding changes.
+## [1.1.0] - 2026-10-16
+
+A new measure: MCP tool annotations. No number published in 1.0.0 changes.
 
 ### Added
 
+- `docs/mcp-tool-annotations.md`: the follow-up report "Do MCP servers say which tools are safe?", on whether the 399 sampled repositories that ship a `server.json` set `readOnlyHint`, `destructiveHint`, `idempotentHint` and `openWorldHint` on their tools, with denominators, 95% confidence intervals, a 60-tool hand check and limitations.
+- `scripts/annotations_fetch.py` (re-fetches those repositories' source at the dataset's commits, nothing executed) and `scripts/annotations.py` (static extraction of tool registrations and hints, standard library only).
+- `data/2026-10/annotations/`: `results.json`, `tools.csv`, `repos.csv` and `hand-check.csv`.
+- `tests/test_annotations.py` with fixtures for TypeScript, JavaScript, Python, Go, Rust and C# registrations, and a check that every share in the report matches `results.json`.
+- A README section and citation for the follow-up report; `CITATION.cff` is now version 1.1.0.
 - `docs/querying-the-dataset.md`: worked jq and Python examples on the committed October 2026 data, with their output, and an offline rebuild of `stats.json` and the charts.
 - `docs/monthly-run.md`: the search token, a dry run and the time budget of the monthly run, with a measured dry run.
 - The monthly workflow takes a `limit` input for a dry run that prints counts and timings and opens no pull request (#3).

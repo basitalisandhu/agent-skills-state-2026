@@ -111,3 +111,7 @@ From November 2026 the study is re-run on the 1st of each month by `.github/work
 - **Precision is not re-measured.** Section 5 applies to every month; `data/trend.csv` marks later months "precision not re-measured". Hooks are flagged with the v3 rule but not read by hand, so `hook_network_review` is empty and the hand-verified hook count is a first-edition figure only.
 - **Secrets.** Secret-rule findings are reduced to per-rule counts in memory as soon as skill-scan-gate returns; no value, file, line or fingerprint is kept, per-repository secret columns stay out of the dataset, and no structural triage or disclosure is done. Clones are deleted once scanned and are never uploaded.
 - **Output.** `data/YYYY-MM/` holds `dataset.csv`, `dataset.json`, `stats.json` and `secret_rules_aggregate.csv`; the same files are copied to `data/` as the latest month, and a row is written to `data/trend.csv`. `scripts/check_numbers.py --month YYYY-MM` checks the month before the pull request is opened.
+
+## 10. Follow-up: tool annotations (version 1.1.0)
+
+On 16 October 2026 the 399 repositories in this sample with a `server.json` were re-fetched at the commits in `data/2026-10/dataset.json`, source files only, and their tool registrations read statically for the four MCP tool hints. Nothing was run. The selection, extraction rules, name classes, intervals, hand check and limitations are in [`docs/mcp-tool-annotations.md`](docs/mcp-tool-annotations.md); the data is in `data/2026-10/annotations/`. It changes no number in sections 1 to 9.

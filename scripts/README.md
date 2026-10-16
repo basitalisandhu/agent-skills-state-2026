@@ -76,3 +76,15 @@ python3 scripts/check_numbers.py
 ```
 
 For every month folder and for the latest copies in `data/`, it checks that `dataset.csv` and `dataset.json` have the row count in `stats.json`, the columns the analysis needs and none of the withheld secret-rule columns, and that the month's row in `data/trend.csv` matches. It also checks that the top-level files are copies of the latest month and that every number in the README's "Key findings" list matches `data/2026-10/stats.json`. CI runs it, and the tests, on every push and pull request.
+
+## Follow-up: MCP tool annotations
+
+`annotations_fetch.py` and `annotations.py` produce [`docs/mcp-tool-annotations.md`](../docs/mcp-tool-annotations.md) from the committed October 2026 dataset. Standard library only; the fetch needs `git` and network access, the analysis needs neither.
+
+```sh
+python scripts/annotations_fetch.py /tmp/ann       # re-fetch the 399 server.json repositories at their dataset commits
+python scripts/annotations.py /tmp/ann             # write data/2026-10/annotations/{results.json,tools.csv,repos.csv}
+python -m pytest -q tests/test_annotations.py      # offline, fixtures only
+```
+
+`hand-check.csv` in the same folder is written by hand, not by the script.

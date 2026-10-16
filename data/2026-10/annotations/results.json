@@ -1,0 +1,346 @@
+{
+ "selection": "every repository in data/2026-10/dataset.json with has_server_json true",
+ "repos_selected": 399,
+ "repos_fetched": 398,
+ "repos_pinned_commit": 398,
+ "repos_unavailable": 1,
+ "repos_with_tools": 304,
+ "repos_without_tools_no_source": 21,
+ "repos_without_tools_with_source": 73,
+ "tools": 17688,
+ "tools_median_per_repo": 14,
+ "tools_by_language": {
+  "cs": 254,
+  "go": 426,
+  "py": 6151,
+  "rs": 116,
+  "ts": 10741
+ },
+ "repo_any_hint_in_source": {
+  "value": "142/304 (46.7%)",
+  "ci95_wilson": [
+   41.2,
+   52.3
+  ]
+ },
+ "repo_all_tools_annotated": {
+  "value": "69/304 (22.7%)",
+  "ci95_wilson": [
+   18.3,
+   27.7
+  ]
+ },
+ "repo_no_tool_annotated": {
+  "value": "188/304 (61.8%)",
+  "ci95_wilson": [
+   56.3,
+   67.1
+  ]
+ },
+ "tool_annotated": {
+  "value": "6243/17688 (35.3%)",
+  "ci95_cluster_bootstrap": [
+   23.4,
+   47.1
+  ],
+  "repos": 304
+ },
+ "tool_hint_inline": {
+  "value": "4495/17688 (25.4%)",
+  "ci95_cluster_bootstrap": [
+   15.1,
+   36.2
+  ],
+  "repos": 304
+ },
+ "repo_mean_share_annotated": {
+  "value": 29.4,
+  "ci95_bootstrap": [
+   24.5,
+   34.6
+  ],
+  "repos": 304
+ },
+ "destructive_repo_mean_share_annotated": {
+  "value": 25.0,
+  "ci95_bootstrap": [
+   17.4,
+   32.8
+  ],
+  "repos": 117
+ },
+ "repos_with_destructive_tools": 117,
+ "repo_destructive_none_annotated": {
+  "value": "83/117 (70.9%)",
+  "ci95_wilson": [
+   62.2,
+   78.4
+  ]
+ },
+ "repo_any_contradiction": {
+  "value": "3/304 (1.0%)",
+  "ci95_wilson": [
+   0.3,
+   2.9
+  ]
+ },
+ "destructive_tools": 1099,
+ "destructive_tool_annotated": {
+  "value": "366/1099 (33.3%)",
+  "ci95_cluster_bootstrap": [
+   18.9,
+   51.7
+  ],
+  "repos": 117
+ },
+ "destructive_tool_destructiveHint_true": {
+  "value": "214/1099 (19.5%)",
+  "ci95_cluster_bootstrap": [
+   8.9,
+   33.0
+  ],
+  "repos": 117
+ },
+ "destructive_tool_destructiveHint_false": {
+  "value": "27/1099 (2.5%)",
+  "ci95_cluster_bootstrap": [
+   0.8,
+   4.8
+  ],
+  "repos": 117
+ },
+ "remove_tools": 777,
+ "remove_tool_annotated": {
+  "value": "277/777 (35.6%)",
+  "ci95_cluster_bootstrap": [
+   19.8,
+   52.5
+  ],
+  "repos": 104
+ },
+ "remove_tool_destructiveHint_true": {
+  "value": "194/777 (25.0%)",
+  "ci95_cluster_bootstrap": [
+   11.2,
+   40.7
+  ],
+  "repos": 104
+ },
+ "remove_tool_destructiveHint_false": {
+  "value": "6/777 (0.8%)",
+  "ci95_cluster_bootstrap": [
+   0.0,
+   2.4
+  ],
+  "repos": 104
+ },
+ "outward_tools": 322,
+ "outward_tool_annotated": {
+  "value": "89/322 (27.6%)",
+  "ci95_cluster_bootstrap": [
+   12.1,
+   54.5
+  ],
+  "repos": 56
+ },
+ "destructive_tool_readOnlyHint_true": {
+  "value": "1/1099 (0.1%)",
+  "ci95_cluster_bootstrap": [
+   0.0,
+   0.2
+  ],
+  "repos": 117
+ },
+ "destructive_tool_contradiction": {
+  "value": "7/1099 (0.6%)",
+  "ci95_cluster_bootstrap": [
+   0.0,
+   1.7
+  ],
+  "repos": 117
+ },
+ "read_tools": 7609,
+ "read_tool_readOnlyHint_true": {
+  "value": "2095/7609 (27.5%)",
+  "ci95_cluster_bootstrap": [
+   14.2,
+   40.7
+  ],
+  "repos": 266
+ },
+ "hint_set": {
+  "readOnlyHint": {
+   "value": "4171/17688 (23.6%)",
+   "ci95_cluster_bootstrap": [
+    13.9,
+    33.9
+   ],
+   "repos": 304
+  },
+  "destructiveHint": {
+   "value": "2685/17688 (15.2%)",
+   "ci95_cluster_bootstrap": [
+    7.5,
+    24.9
+   ],
+   "repos": 304
+  },
+  "idempotentHint": {
+   "value": "1971/17688 (11.1%)",
+   "ci95_cluster_bootstrap": [
+    5.2,
+    19.0
+   ],
+   "repos": 304
+  },
+  "openWorldHint": {
+   "value": "2216/17688 (12.5%)",
+   "ci95_cluster_bootstrap": [
+    5.6,
+    21.2
+   ],
+   "repos": 304
+  }
+ },
+ "destructive_by_verb": {
+  "charge": {
+   "tools": 23,
+   "annotated": 0,
+   "destructiveHint_true": 0
+  },
+  "del": {
+   "tools": 1,
+   "annotated": 0,
+   "destructiveHint_true": 0
+  },
+  "delete": {
+   "tools": 582,
+   "annotated": 197,
+   "destructiveHint_true": 157
+  },
+  "destroy": {
+   "tools": 4,
+   "annotated": 2,
+   "destructiveHint_true": 1
+  },
+  "drop": {
+   "tools": 15,
+   "annotated": 5,
+   "destructiveHint_true": 5
+  },
+  "erase": {
+   "tools": 3,
+   "annotated": 0,
+   "destructiveHint_true": 0
+  },
+  "kill": {
+   "tools": 4,
+   "annotated": 0,
+   "destructiveHint_true": 0
+  },
+  "overwrite": {
+   "tools": 2,
+   "annotated": 2,
+   "destructiveHint_true": 2
+  },
+  "pay": {
+   "tools": 19,
+   "annotated": 0,
+   "destructiveHint_true": 0
+  },
+  "purge": {
+   "tools": 3,
+   "annotated": 0,
+   "destructiveHint_true": 0
+  },
+  "refund": {
+   "tools": 23,
+   "annotated": 2,
+   "destructiveHint_true": 0
+  },
+  "remove": {
+   "tools": 121,
+   "annotated": 56,
+   "destructiveHint_true": 21
+  },
+  "revoke": {
+   "tools": 23,
+   "annotated": 8,
+   "destructiveHint_true": 3
+  },
+  "rm": {
+   "tools": 1,
+   "annotated": 0,
+   "destructiveHint_true": 0
+  },
+  "send": {
+   "tools": 157,
+   "annotated": 41,
+   "destructiveHint_true": 13
+  },
+  "terminate": {
+   "tools": 5,
+   "annotated": 3,
+   "destructiveHint_true": 1
+  },
+  "transfer": {
+   "tools": 30,
+   "annotated": 4,
+   "destructiveHint_true": 3
+  },
+  "truncate": {
+   "tools": 1,
+   "annotated": 1,
+   "destructiveHint_true": 1
+  },
+  "uninstall": {
+   "tools": 7,
+   "annotated": 0,
+   "destructiveHint_true": 0
+  },
+  "wipe": {
+   "tools": 5,
+   "annotated": 3,
+   "destructiveHint_true": 3
+  },
+  "write": {
+   "tools": 72,
+   "annotated": 42,
+   "destructiveHint_true": 4
+  }
+ },
+ "stars_100plus": {
+  "repos": 67,
+  "repo_any_hint_in_source": {
+   "value": "36/67 (53.7%)",
+   "ci95_wilson": [
+    41.9,
+    65.1
+   ]
+  },
+  "tool_annotated": {
+   "value": "1647/5247 (31.4%)",
+   "ci95_cluster_bootstrap": [
+    12.5,
+    52.1
+   ]
+  }
+ },
+ "stars_under_100": {
+  "repos": 237,
+  "repo_any_hint_in_source": {
+   "value": "106/237 (44.7%)",
+   "ci95_wilson": [
+    38.5,
+    51.1
+   ]
+  },
+  "tool_annotated": {
+   "value": "4596/12441 (36.9%)",
+   "ci95_cluster_bootstrap": [
+    23.0,
+    52.1
+   ]
+  }
+ }
+}

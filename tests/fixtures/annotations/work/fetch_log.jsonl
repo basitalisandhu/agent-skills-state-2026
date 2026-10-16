@@ -1,0 +1,2 @@
+{"repo": "fixture/repo", "state": "pinned", "sha": "0000000000000000000000000000000000000000", "files": 6}
+{"repo": "fixture/gone", "state": "unavailable"}

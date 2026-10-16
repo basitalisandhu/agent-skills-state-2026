@@ -1,0 +1,61 @@
+sample_index,repo,file,line,name,verb_class,annotated,is_tool_registration,annotated_correct,verb_class_correct,note
+0,Klavis-AI/klavis,mcp_servers/google_jobs/server.py,96,google_jobs_search,read,True,yes,yes,yes,readOnlyHint inside a **{...} dict next to a category
+1,w159/atlas-connectwise,mcp_servers/auvik-mcp/src/tools/configurations.ts,23,auvik_configurations_list,read,False,yes,yes,yes,
+2,pulsemcp/mcp-servers,experimental/appsignal/shared/src/tools/get-exception-incident.ts,22,get_exception_incident,read,False,yes,yes,yes,
+3,es617/obsidian-sync-mcp,src/tools.ts,201,search_notes,read,False,yes,yes,yes,
+4,shihyu/jason_note,src/python/data/LLM網路爬蟲終極實戰/ch14/Crawl4AI_API_Server/server.py,310,generate_pdf,other,False,yes,yes,yes,custom @mcp_tool decorator
+5,Neverlow512/agent-droid-bridge,src/agent_droid_bridge/server.py,386,get_screen_text,read,False,yes,yes,yes,
+6,JonathanRReed/Apple-MCPs,Apple-Tools-MCP/src/apple_agent_mcp/tools.py,2093,apple_capture_follow_up_from_mail,other,True,yes,yes,yes,
+7,xorrkaz/cml-mcp,src/cml_mcp/tools/system.py,44,get_cml_information,read,True,yes,yes,yes,
+8,codespar/mcp-dev-latam,packages/banking/dock/src/index.ts,340,unfreeze_account,other,False,yes,yes,yes,
+9,ykarapazar/word-mcp-live,word_document_server/main.py,1176,word_live_get_text,read,True,yes,yes,yes,
+10,conductor-oss/conductor-mcp,conductor_mcp/tools/task.py,43,get_task_definition_for_tasktype,read,False,yes,yes,yes,
+11,HomenShum/NodeBenchAI,packages/mcp-local/src/tools/overstoryTools.ts,377,overstory_merge_queue,other,False,yes,yes,yes,
+12,MarcelRoozekrans/roslyn-codelens-mcp,src/RoslynCodeLens/Tools/GetProjectDependenciesTool.cs,10,get_project_dependencies,read,False,yes,yes,yes,
+13,IBazylchuk/paparats-mcp,packages/server/src/mcp-handler.ts,3831,term_record,other,True,yes,yes,yes,"annotations by reference to a constant; traced, it sets all four hints"
+14,AceDataCloud/SunoMCP,tools/audio_tools.py,808,suno_generate_with_persona_vox,other,False,yes,yes,yes,
+15,theluckystrike/mcp-servers,servers/barcode/src/index.ts,429,barcode_create,other,True,yes,yes,yes,
+16,mindstone/mcp-servers,connectors/google-workspace/src/tools/definitions/calendar.ts,373,create_workspace_calendar_event,other,True,yes,yes,yes,
+17,pulsemcp/mcp-servers,experimental/agent-orchestrator/shared/src/tools/search-sessions.ts,118,quick_search_sessions,read,False,yes,yes,yes,
+18,mindstone/mcp-servers,connectors/google-workspace/src/tools/definitions/gmail.ts,956,update_workspace_draft,other,True,yes,yes,yes,
+19,nirholas/universal-crypto-mcp,packages/wallets/evm/ethereum-wallet-mcp/src/ethereum_wallet_mcp/tools/typed_data.py,643,recover_typed_data_signer,other,False,yes,yes,yes,
+20,theYahia/WWmcp,servers/retailcrm/src/index.ts,182,retailcrm-mcp,other,True,no,n/a,n/a,"not a tool: the server's own name, captured because a loop below registers tools by reference"
+21,Klavis-AI/klavis,mcp_servers/close/server.py,1996,close_search_note_activities,read,True,yes,yes,yes,
+22,ryxmarcus/mcp-aws,src/mysql-mcp-server/awslabs/mysql_mcp_server/server.py,159,get_table_schema,read,False,yes,yes,yes,
+23,rhel-lightspeed/linux-mcp-server,src/linux_mcp_server/tools/storage.py,103,list_directories,read,True,yes,yes,yes,
+24,miikkij/aimeat-protocol,aimeat/src/mcp/organisms.ts,287,aimeat_organism_join,other,True,yes,yes,yes,"annotationsFor() helper; traced, it sets the hints"
+25,HomenShum/NodeBenchAI,packages/openclaw-mcp-nodebench/src/tools/workflowAuditTools.js,146,audit_workflow_definition,other,False,yes,yes,yes,
+26,tysongoulding/experiments,life-os/gsheets/sheets_tools.py,94,get_spreadsheet_info,read,False,yes,yes,yes,"is_read_only is an error-handler argument, not an MCP hint: correctly not annotated"
+27,codespar/mcp-dev-latam,packages/banking/matera/src/index.ts,393,list_dict_keys,read,False,yes,yes,yes,
+28,Elpolakos/lab-instrument-mcps,servers/physics/srs-lockin/src/labmcp_srs_lockin/server.py,380,set_input,other,True,yes,yes,yes,"**CONTROL kwargs; traced, they carry ToolAnnotations with hints"
+29,theluckystrike/mcp-servers,servers/currency/src/index.ts,288,rate_history,other,True,yes,yes,yes,
+30,cappyeo/discord-mcp,packages/mcp-core/src/tools/users/create_dm.ts,19,users_create_dm,other,True,yes,yes,yes,
+31,tysongoulding/experiments,network-agent/mcp-servers/rag-mcp/rag_mcp_server.py,569,rag_search,read,False,yes,yes,yes,
+32,isakskogstad/Riksdag-Regering-MCP,mcp/src/core/mcpServer.ts,130,enhanced_government_search,read,False,yes,yes,yes,
+33,Klavis-AI/klavis,mcp_servers/motion/server.py,292,motion_get_project,read,True,yes,yes,yes,
+34,Klavis-AI/klavis,mcp_servers/intercom/src/tools/definitions/companyTools.ts,241,intercom_find_company,read,True,yes,yes,yes,
+35,codespar/mcp-dev-latam,packages/identity/brasil-api/src/index.ts,199,get_domain_info,read,False,yes,yes,yes,
+36,w159/atlas-connectwise,mcp_servers/knowbe4-mcp/src/domains/groups.ts,103,knowbe4_groups_members,other,False,yes,yes,yes,
+37,zz-plant/ambit,src/mcp/tools.ts,572,credentials,other,True,yes,yes,yes,"constant READS; traced, readOnlyHint true"
+38,Klavis-AI/klavis,mcp_servers/openrouter/server.py,403,openrouter_get_user_profile,read,True,yes,yes,yes,
+39,Jane-o-O-o-O/personal-agent,resources/ecosystem/upstream/volcengine-mcp/ad78d1c29b7f/server/mcp_server_vod/src/vod/mcp_tools/edit.py,335,get_v_creative_task_result,read,False,yes,yes,yes,
+40,oldmangrizzz/hughmkiii,.gemini/extensions/github/pkg/github/repositories.go,1710,get_latest_release,read,True,yes,yes,yes,
+41,taehyeonglim/korean-elementary-learning-map-mcp,src/server.mjs,127,search_topics,read,False,yes,yes,yes,
+42,theluckystrike/mcp-servers,servers/checklist/src/index.ts,567,run_report,other,True,yes,yes,yes,
+43,Jane-o-O-o-O/personal-agent,resources/ecosystem/upstream/volcengine-mcp/ad78d1c29b7f/server/mcp_server_emr/src/mcp_server_emr/emr_mcp_server.py,25,list_emr_on_serverless_jobs,read,False,yes,yes,yes,
+44,diegonmarcos/cloud-u-containers,infra-api_cloud-superapp-mcp/src/code/lib-mcp/src/tools.ts,273,superapp_force_stop,other,False,yes,yes,yes,
+45,Klavis-AI/klavis,mcp_servers/hubspot/server.py,873,hubspot_create_association,other,False,yes,yes,yes,annotations object with a category only and no hint: correctly not annotated
+46,Klavis-AI/klavis,mcp_servers/dropbox/src/tools.ts,97,dropbox_list_revisions,read,True,yes,yes,yes,
+47,Klavis-AI/klavis,mcp_servers/woocommerce_toolathlon/src/server.ts,824,woo_tax_rates_get,read,False,yes,yes,yes,
+48,internet-dot/Ballon-MCP-Server,src/BalloonTools.ts,4006,balloon_run_install_diagnostics,other,True,yes,yes,yes,
+49,miikkij/aimeat-protocol,aimeat/src/mcp/catalogue.ts,80,aimeat_catalogue_boards,other,True,yes,yes,yes,annotationsFor() helper; traced
+50,K-Dense-AI/lab-instrument-mcps,servers/engineering/ni-daqmx/src/labmcp_ni_daqmx/server.py,284,read_analog,read,True,yes,yes,yes,"**READ kwargs; traced, read_only_hint true"
+51,theYahia/WWmcp,servers/mango-office/src/server.ts,69,get_recording,read,False,yes,yes,yes,
+52,miikkij/aimeat-protocol,aimeat/src/mcp/exchange.ts,266,aimeat_exchange_contract_off,other,True,yes,yes,yes,annotationsFor() helper; traced
+53,HomenShum/NodeBenchAI,packages/mcp-local/src/tools/planSynthesisTools.ts,381,generate_proposal_memo,other,False,yes,yes,yes,
+54,Intugle/data-tools,src/intugle/mcp/semantic_layer/router.py,16,get_tables,read,False,yes,yes,yes,
+55,lashkarigroupofcompanies/lgc-tredar,ui/api/mcp/registry/analysis-tools.ts,672,get_population_exposure,read,True,yes,yes,yes,
+56,Jane-o-O-o-O/personal-agent,resources/ecosystem/upstream/volcengine-mcp/ad78d1c29b7f/server/mcp_server_vefaas_function/src/mcp_server_vefaas_function/vefaas_server.py,1248,get_application_detail,read,False,yes,yes,yes,first pass wrongly called this annotated (markdown ** in the description read as a kwargs spread); fixed before the final run
+57,miikkij/aimeat-protocol,aimeat/src/mcp/themes.ts,167,aimeat_theme_policy_set,other,True,yes,yes,yes,annotationsFor() helper; traced
+58,IgorGanapolsky/ThumbGate,scripts/tool-registry.js,810,bootstrap_internal_agent,other,False,yes,yes,yes,
+59,Imburr-BEL/ninjaone-mcp,src/domains/alerts.ts,67,ninjaone_alerts_reset,other,False,yes,yes,yes,

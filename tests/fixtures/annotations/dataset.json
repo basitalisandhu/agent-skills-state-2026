@@ -1,0 +1,3 @@
+[{"repo": "fixture/repo", "commit": "0000000000000000000000000000000000000000", "has_server_json": true, "stars": 120, "language": "TypeScript"},
+ {"repo": "fixture/gone", "commit": "1111111111111111111111111111111111111111", "has_server_json": true, "stars": 3, "language": "Python"},
+ {"repo": "fixture/skills-only", "commit": "2222222222222222222222222222222222222222", "has_server_json": false, "stars": 9, "language": null}]
