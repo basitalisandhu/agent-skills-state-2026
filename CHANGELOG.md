@@ -6,6 +6,19 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+No published number or finding changes.
+
+### Added
+
+- `docs/querying-the-dataset.md`: worked jq and Python examples on the committed October 2026 data, with their output, and an offline rebuild of `stats.json` and the charts.
+- `docs/monthly-run.md`: the search token, a dry run and the time budget of the monthly run, with a measured dry run.
+- The monthly workflow takes a `limit` input for a dry run that prints counts and timings and opens no pull request (#3).
+
+### Changed
+
+- `run_month.py` stops at once when code search refuses the token (a 403 that is not a rate limit, or a 422 on the first page of a query) instead of waiting or continuing with an empty sample, and reports search and scan timings (#3).
+- The monthly workflow uses a `SEARCH_TOKEN` secret when one exists, and the workflow token otherwise (#3).
+
 ## [1.0.0] - 2026-10-13
 
 First publication: "The state of public agent skills and MCP servers, October 2026".

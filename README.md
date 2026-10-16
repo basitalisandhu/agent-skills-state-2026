@@ -134,6 +134,8 @@ Or run the whole pipeline for a month in one command: `GITHUB_TOKEN=... python s
 
 Search results change daily, so a rerun draws a different sample; the method, not the exact numbers, is what reproduces. Step-by-step commands are in [`scripts/README.md`](scripts/README.md).
 
+To explore the data instead, [`docs/querying-the-dataset.md`](docs/querying-the-dataset.md) has worked jq and Python examples with their output, and shows how to rebuild `stats.json` and the charts offline from the committed dataset. [`docs/monthly-run.md`](docs/monthly-run.md) covers the scheduled run: the token, a dry run and the time budget.
+
 ## Repository layout
 
 | Path | Contents |
@@ -148,6 +150,7 @@ Search results change daily, so a rerun draws a different sample; the method, no
 | `data/trend.csv` | One row per month: key findings, denominators, seed, request counts and notes |
 | `charts/` | The three first-edition charts and `trend.png` |
 | `scripts/` | Collection, fetch, scan and analysis scripts, `run_month.py` and `plot_trend.py` for the monthly run, and `check_numbers.py` |
+| `docs/` | Worked examples of querying the dataset, and how the monthly run works |
 | `tests/` | Tests for `run_month.py` |
 | `METHOD.md` | Full method |
 
