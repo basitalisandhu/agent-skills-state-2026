@@ -304,6 +304,19 @@ def upsert_trend(path, row):
 
 # ---------------------------------------------------------------- GitHub API
 
+def is_rate_limited(code, headers):
+    """True when an HTTP error is a rate limit to wait out, not a refusal to report.
+
+    GitHub answers 429, or 403 with X-RateLimit-Remaining: 0 or a Retry-After header, when a limit is
+    used up. Any other 403 means the token is not allowed to make the request, and waiting will not help.
+    """
+    if code == 429:
+        return True
+    if code != 403 or headers is None:
+        return False
+    return headers.get("X-RateLimit-Remaining") == "0" or bool(headers.get("Retry-After"))
+
+
 class GitHub:
     """Minimal REST and GraphQL client. The token stays in this object and is sent only to api.github.com."""
 
@@ -331,13 +344,16 @@ class GitHub:
                     payload = json.loads(resp.read().decode("utf-8"))
                     return payload, resp.headers
             except urllib.error.HTTPError as e:
-                if e.code in (403, 429):
+                if is_rate_limited(e.code, e.headers):
                     reset = e.headers.get("X-RateLimit-Reset")
                     retry = e.headers.get("Retry-After")
                     wait = int(retry) if retry and retry.isdigit() else (max(5, int(reset) - int(time.time()) + 2) if reset else 60)
                     self._sleep(min(wait, 900))
                     continue
-                if e.code == 422:  # beyond the 1,000-result window
+                if e.code == 403:
+                    raise SystemExit(f"GitHub API refused a {kind} request (HTTP 403, not a rate limit): the token cannot use "
+                                     "this endpoint. The monthly workflow needs a SEARCH_TOKEN secret; see docs/monthly-run.md") from None
+                if e.code == 422:  # beyond the 1,000-result window, or a query the token cannot run
                     return None, e.headers
                 if e.code >= 500:
                     self._sleep(30)
@@ -374,6 +390,9 @@ def search(gh, queries):
     for kind, q, pages in queries:
         for p in range(1, pages + 1):
             d = gh.search_code(q, p)
+            if d is None and p == 1:
+                raise SystemExit(f"code search rejected the first page of a {kind} query (HTTP 422); the token may not be "
+                                 "allowed to search all of GitHub. See docs/monthly-run.md")
             if d is None:
                 log.append({"kind": kind, "q": q, "page": p, "n": 0, "note": "beyond result window"})
                 break
@@ -639,8 +658,10 @@ def main(argv=None):
 
     gh = GitHub(os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN"))
     queries = dry_run_queries() if dry else search_queries()
+    search_started = time.time()
     items, slog = search(gh, queries)
-    print(f"search: {gh.requests['search']} requests, {len(items)} hits", flush=True)
+    search_minutes = round((time.time() - search_started) / 60, 1)
+    print(f"search: {gh.requests['search']} requests, {len(items)} hits, {search_minutes} min", flush=True)
     pool, picked = draw_sample(items, a.limit if dry else SAMPLE_SIZE, seed)
     print(f"sample: {len(picked)} of {pool} distinct repositories, seed {seed}", flush=True)
     kinds = dict(picked)
@@ -661,6 +682,7 @@ def main(argv=None):
         finally:
             shutil.rmtree(dest, ignore_errors=True)  # clones never outlive their scan
 
+    scan_started = time.time()
     with cf.ThreadPoolExecutor(a.workers) as ex:
         for i, (full, st, rec) in enumerate(ex.map(one, [r for r, _ in picked])):
             status[st] += 1
@@ -669,6 +691,7 @@ def main(argv=None):
                 secret_counts.append(collections.Counter(rec["secret_counts"]))
             if i % 100 == 0:
                 print(f"scan: {i + 1}/{len(picked)} ({int(time.time() - started)}s)", flush=True)
+    scan_minutes = round((time.time() - scan_started) / 60, 1)
     rows = [r for _, r in sorted(rows, key=lambda x: x[0])]
     if not rows:
         raise SystemExit("no repository was scanned")
@@ -702,7 +725,8 @@ def main(argv=None):
         "search_hits": len(items), "search_wait_seconds": gh.waited_seconds,
         "incomplete_search_pages": sum(1 for x in slog if x.get("incomplete")),
         "pool_repos": pool, "sampled": len(picked), "fetch_status": dict(status),
-        "secret_rule_repos": agg[-1][2], "minutes": round((time.time() - started) / 60, 1),
+        "secret_rule_repos": agg[-1][2], "minutes": round((time.time() - started) / 60, 1), "search_minutes": search_minutes,
+        "scan_minutes": scan_minutes, "workers": a.workers,
         "tools": {k: {x: y for x, y in v.items() if x != "repo"} for k, v in TOOLS.items()},
         "precision": PRECISION_NOTE, "hook_network_review": "not done; hook_network_flag is the automatic v3 flag",
     }
@@ -717,7 +741,7 @@ def main(argv=None):
         run_info = dict(stats["run"], notes="automatic monthly run; hooks flagged, not hand-reviewed; secret rules counted, not triaged")
         upsert_trend(os.path.join(DATA, "trend.csv"), trend_row(a.month, stats, run_info))
     print(json.dumps({"out": out, **{k: stats["run"][k] for k in ("search_requests", "graphql_requests", "search_hits",
-                                                                    "pool_repos", "sampled", "fetch_status", "minutes")},
+                                                                    "pool_repos", "sampled", "fetch_status", "search_minutes", "scan_minutes", "workers", "minutes")},
                       "repos": stats["repos"], "repos_with_skills": stats["repos_with_skills"]}))
     return 0
 

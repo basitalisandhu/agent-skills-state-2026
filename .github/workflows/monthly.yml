@@ -12,6 +12,10 @@ on:
         description: "Month to measure, YYYY-MM (default: the current month in UTC)"
         required: false
         type: string
+      limit:
+        description: "Dry run: scan only this many repositories after one page of one query per kind, print counts and timings, open no pull request (leave empty for a full run)"
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -50,18 +54,36 @@ jobs:
             exit 1
           fi
           echo "month=$m" >> "$GITHUB_OUTPUT"
-      - name: "Run the pipeline: search, sample, fetch, scan, analyse"
+      - name: "Dry run: search briefly, scan a few repositories, print counts and timings"
+        if: inputs.limit != ''
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Code search needs a token that may search all of GitHub; see docs/monthly-run.md
+          GITHUB_TOKEN: ${{ secrets.SEARCH_TOKEN || github.token }}
+          MONTH: ${{ steps.month.outputs.month }}
+          LIMIT: ${{ inputs.limit }}
+        run: |
+          if ! [[ "$LIMIT" =~ ^[0-9]+$ ]]; then
+            echo "limit must be a whole number" >&2
+            exit 1
+          fi
+          python scripts/run_month.py --month "$MONTH" --work "$RUNNER_TEMP/work" --limit "$LIMIT" --out "$RUNNER_TEMP/dry"
+      - name: "Run the pipeline: search, sample, fetch, scan, analyse"
+        if: inputs.limit == ''
+        env:
+          # Code search needs a token that may search all of GitHub; see docs/monthly-run.md
+          GITHUB_TOKEN: ${{ secrets.SEARCH_TOKEN || github.token }}
           MONTH: ${{ steps.month.outputs.month }}
         run: python scripts/run_month.py --month "$MONTH" --work "$RUNNER_TEMP/work"
       - name: Check the new month against its stats
+        if: inputs.limit == ''
         env:
           MONTH: ${{ steps.month.outputs.month }}
         run: python scripts/check_numbers.py --month "$MONTH"
       - name: Draw the trend chart
+        if: inputs.limit == ''
         run: python scripts/plot_trend.py
       - name: Write the pull request body
+        if: inputs.limit == ''
         env:
           MONTH: ${{ steps.month.outputs.month }}
         run: |
@@ -80,6 +102,7 @@ jobs:
           print("\nReview before merging: CI does not run on pull requests opened by GITHUB_TOKEN; check_numbers.py already ran in the job.")
           PY
       - name: Open or update the pull request
+        if: inputs.limit == ''
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           branch: monthly/${{ steps.month.outputs.month }}

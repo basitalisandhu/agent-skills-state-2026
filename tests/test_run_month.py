@@ -192,3 +192,39 @@ def test_first_edition_trend_row_matches_stats():
     built = rm.trend_row("2026-10", s, {})
     for k in ("repos", "no_security_md", "no_security_md_pct", "unpinned_mcp", "yaml_reject_repos_pct"):
         assert float(row[k]) == float(built[k])
+
+
+# telling a rate limit from a refusal
+
+def test_rate_limit_is_waited_out():
+    assert rm.is_rate_limited(429, {})
+    assert rm.is_rate_limited(403, {"X-RateLimit-Remaining": "0"})
+    assert rm.is_rate_limited(403, {"Retry-After": "60"})
+
+
+def test_refusal_is_not_a_rate_limit():
+    assert not rm.is_rate_limited(403, {"X-RateLimit-Remaining": "9"})
+    assert not rm.is_rate_limited(403, {})
+    assert not rm.is_rate_limited(403, None)
+    assert not rm.is_rate_limited(422, {"X-RateLimit-Remaining": "0"})
+
+
+class _FakeSearch:
+    def __init__(self, pages):
+        self.pages = pages
+
+    def search_code(self, q, page):
+        return self.pages.get(page)
+
+
+def test_search_rejected_on_first_page_stops_the_run():
+    with pytest.raises(SystemExit):
+        rm.search(_FakeSearch({}), [("skill", "filename:SKILL.md size:0..300", 3)])
+
+
+def test_search_past_the_result_window_is_not_an_error():
+    item = {"repository": {"full_name": "o/r", "fork": False, "owner": {"login": "o"}}}
+    gh = _FakeSearch({1: {"total_count": 200, "items": [item] * 100}})
+    items, log = rm.search(gh, [("skill", "filename:SKILL.md size:0..300", 3)])
+    assert len(items) == 100
+    assert log[-1]["note"] == "beyond result window"
