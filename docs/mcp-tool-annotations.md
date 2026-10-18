@@ -21,7 +21,7 @@ Every share above is checked against [`data/2026-10/annotations/results.json`](.
 > 2. Treat a tool with no hints as able to change or delete things. That is what the specification's defaults say, and it is the only safe reading.
 > 3. Check that any tool whose name says delete, remove, send, pay or write is not marked `readOnlyHint: true` or `destructiveHint: false`.
 > 4. Hints are claims by the author, not guarantees. Allow-list read-only tools by name in your client, and keep the rest on "ask".
-> 5. Pin the server to a version (the first report found 46.0% of configurations do not), so the hints you checked are the ones you run.
+> 5. Pin the server to a version (the first report found 46.0% of configurations do not), so the hints you checked are the ones you run. A version pin alone may not be enough: the [RugSnare drift-watch corpus](https://github.com/Paraphern/rugsnare/tree/main/docs/servers) documents a server whose tool schema changed between installs of the same version because a floating dependency resolved differently, so a lockfile or a recorded tool-contract hash is the stronger check.
 
 ## Why this matters, and why it is not a vulnerability
 

@@ -6,6 +6,10 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- A "Related datasets" section in the README linking the RugSnare drift-watch corpus, and a note on dependency drift in `docs/mcp-tool-annotations.md`.
+
 ## [1.1.0] - 2026-10-16
 
 A new measure: MCP tool annotations. No number published in 1.0.0 changes.

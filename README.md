@@ -173,6 +173,10 @@ For the follow-up report:
 
 > Ali, M. B. (2026). *Do MCP servers say which tools are safe? Tool annotations in 304 public servers, October 2026* (Version 1.1.0) [Data set and report]. https://github.com/basitalisandhu/agent-skills-state-2026/blob/main/docs/mcp-tool-annotations.md
 
+## Related datasets
+
+- [RugSnare drift-watch corpus](https://github.com/Paraphern/rugsnare/blob/main/tools/drift-watch-corpus.json) (Paraphern, Apache-2.0): a public, machine-readable record of how the tool contracts of 28 npm-distributed MCP servers and two skills collections changed across released versions, with a [page per server](https://github.com/Paraphern/rugsnare/tree/main/docs/servers) giving the version window and a repro command. It measures what a pinned version later serves, which this study does not.
+
 ## Related tools
 
 - [skill-scan-gate](https://github.com/basitalisandhu/skill-scan-gate): CI gate for skills and plugins (the scanner used here).
