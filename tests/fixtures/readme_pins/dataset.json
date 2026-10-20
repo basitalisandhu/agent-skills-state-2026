@@ -1,0 +1,4 @@
+[{"repo": "fixture/server", "commit": "aaaa", "stars": 150, "has_server_json": true},
+ {"repo": "fixture/other", "commit": "bbbb", "stars": 3, "has_server_json": true},
+ {"repo": "fixture/gone", "commit": "cccc", "stars": 0, "has_server_json": true},
+ {"repo": "fixture/skills-only", "commit": "dddd", "stars": 9, "has_server_json": false}]

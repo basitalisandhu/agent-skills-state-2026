@@ -115,3 +115,7 @@ From November 2026 the study is re-run on the 1st of each month by `.github/work
 ## 10. Follow-up: tool annotations (version 1.1.0)
 
 On 16 October 2026 the 399 repositories in this sample with a `server.json` were re-fetched at the commits in `data/2026-10/dataset.json`, source files only, and their tool registrations read statically for the four MCP tool hints. Nothing was run. The selection, extraction rules, name classes, intervals, hand check and limitations are in [`docs/mcp-tool-annotations.md`](docs/mcp-tool-annotations.md); the data is in `data/2026-10/annotations/`. It changes no number in sections 1 to 9.
+
+## 11. Follow-up: README install pins (version 1.2.0)
+
+On 20 October 2026 the same 399 repositories were re-fetched at the commits in `data/2026-10/dataset.json`, README and `server.json` files only, and every launch command in their READMEs (`npx`, `bunx`, `pnpm dlx`, `yarn dlx`, `uvx`, `uv tool run`, `pipx run`, `docker run`) was classed as exact, range, latest or unpinned. Nothing was run. The selection, patterns, exclusions, version classes, intervals, hand check and limitations are in [`docs/mcp-readme-install-pins.md`](docs/mcp-readme-install-pins.md); the data is in `data/2026-10/readme-pins/`. It changes no number in sections 1 to 10.

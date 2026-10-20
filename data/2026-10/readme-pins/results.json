@@ -1,0 +1,347 @@
+{
+ "selection": "every repository in data/2026-10/dataset.json with has_server_json true",
+ "repos_selected": 399,
+ "repos_fetched": 391,
+ "repos_pinned_commit": 391,
+ "repos_unavailable": 8,
+ "repos_with_readme": 388,
+ "repos_with_launch_command": 264,
+ "repos_readme_no_launch_command": 124,
+ "commands": 835,
+ "commands_by_launcher": {
+  "bunx": 10,
+  "docker run": 65,
+  "npx": 576,
+  "pipx run": 2,
+  "uv tool run": 4,
+  "uvx": 178
+ },
+ "commands_by_class": {
+  "exact": 18,
+  "range": 2,
+  "latest": 115,
+  "unpinned": 700
+ },
+ "repo_any_floating": {
+  "value": "259/264 (98.1%)",
+  "ci95_wilson": [
+   95.6,
+   99.2
+  ]
+ },
+ "repo_all_floating": {
+  "value": "252/264 (95.5%)",
+  "ci95_wilson": [
+   92.2,
+   97.4
+  ]
+ },
+ "repo_any_exact": {
+  "value": "12/264 (4.5%)",
+  "ci95_wilson": [
+   2.6,
+   7.8
+  ]
+ },
+ "repo_any_latest_tag": {
+  "value": "69/264 (26.1%)",
+  "ci95_wilson": [
+   21.2,
+   31.8
+  ]
+ },
+ "command_floating": {
+  "value": "817/835 (97.8%)",
+  "ci95_cluster_bootstrap": [
+   96.1,
+   99.1
+  ],
+  "repos": 264
+ },
+ "command_latest_tag": {
+  "value": "115/835 (13.8%)",
+  "ci95_cluster_bootstrap": [
+   9.2,
+   20.8
+  ],
+  "repos": 264
+ },
+ "command_range": {
+  "value": "2/835 (0.2%)",
+  "ci95_cluster_bootstrap": [
+   0.0,
+   0.7
+  ],
+  "repos": 264
+ },
+ "by_ecosystem": {
+  "npm": {
+   "repos": 189,
+   "commands": 576,
+   "repo_any_floating": {
+    "value": "188/189 (99.5%)",
+    "ci95_wilson": [
+     97.1,
+     99.9
+    ]
+   },
+   "repo_all_floating": {
+    "value": "185/189 (97.9%)",
+    "ci95_wilson": [
+     94.7,
+     99.2
+    ]
+   },
+   "command_floating": {
+    "value": "571/576 (99.1%)",
+    "ci95_cluster_bootstrap": [
+     98.0,
+     99.9
+    ],
+    "repos": 189
+   }
+  },
+  "pypi": {
+   "repos": 69,
+   "commands": 179,
+   "repo_any_floating": {
+    "value": "66/69 (95.7%)",
+    "ci95_wilson": [
+     88.0,
+     98.5
+    ]
+   },
+   "repo_all_floating": {
+    "value": "63/69 (91.3%)",
+    "ci95_wilson": [
+     82.3,
+     96.0
+    ]
+   },
+   "command_floating": {
+    "value": "169/179 (94.4%)",
+    "ci95_cluster_bootstrap": [
+     85.9,
+     98.8
+    ],
+    "repos": 69
+   }
+  },
+  "oci": {
+   "repos": 55,
+   "commands": 65,
+   "repo_any_floating": {
+    "value": "53/55 (96.4%)",
+    "ci95_wilson": [
+     87.7,
+     99.0
+    ]
+   },
+   "repo_all_floating": {
+    "value": "53/55 (96.4%)",
+    "ci95_wilson": [
+     87.7,
+     99.0
+    ]
+   },
+   "command_floating": {
+    "value": "62/65 (95.4%)",
+    "ci95_cluster_bootstrap": [
+     88.1,
+     100.0
+    ],
+    "repos": 55
+   }
+  },
+  "git": {
+   "repos": 9,
+   "commands": 15,
+   "repo_any_floating": {
+    "value": "9/9 (100.0%)",
+    "ci95_wilson": [
+     70.1,
+     100
+    ]
+   },
+   "repo_all_floating": {
+    "value": "9/9 (100.0%)",
+    "ci95_wilson": [
+     70.1,
+     100
+    ]
+   },
+   "command_floating": {
+    "value": "15/15 (100.0%)",
+    "ci95_cluster_bootstrap": [
+     100.0,
+     100.0
+    ],
+    "repos": 9
+   }
+  }
+ },
+ "npx_auto_yes": {
+  "value": "410/576 (71.2%)",
+  "ci95_cluster_bootstrap": [
+   60.2,
+   82.6
+  ],
+  "repos": 189
+ },
+ "npx_auto_yes_and_floating": {
+  "value": "406/576 (70.5%)",
+  "ci95_cluster_bootstrap": [
+   59.8,
+   81.5
+  ],
+  "repos": 189
+ },
+ "stars_100plus": {
+  "repos": 69,
+  "repo_any_floating": {
+   "value": "68/69 (98.6%)",
+   "ci95_wilson": [
+    92.2,
+    99.7
+   ]
+  },
+  "repo_all_floating": {
+   "value": "65/69 (94.2%)",
+   "ci95_wilson": [
+    86.0,
+    97.7
+   ]
+  }
+ },
+ "stars_under_100": {
+  "repos": 195,
+  "repo_any_floating": {
+   "value": "191/195 (97.9%)",
+   "ci95_wilson": [
+    94.8,
+    99.2
+   ]
+  },
+  "repo_all_floating": {
+   "value": "187/195 (95.9%)",
+   "ci95_wilson": [
+    92.1,
+    97.9
+   ]
+  }
+ },
+ "own_package": {
+  "repos_declaring_package": 303,
+  "repos_with_own_launch_command": 219,
+  "repo_own_any_floating": {
+   "value": "214/219 (97.7%)",
+   "ci95_wilson": [
+    94.8,
+    99.0
+   ]
+  },
+  "repo_own_all_floating": {
+   "value": "209/219 (95.4%)",
+   "ci95_wilson": [
+    91.8,
+    97.5
+   ]
+  },
+  "repos_registry_exact_readme_floating": {
+   "value": "207/212 (97.6%)",
+   "ci95_wilson": [
+    94.6,
+    99.0
+   ]
+  },
+  "repos_registry_exact_readme_all_floating": {
+   "value": "202/212 (95.3%)",
+   "ci95_wilson": [
+    91.5,
+    97.4
+   ]
+  },
+  "repos_registry_exact": 212,
+  "own_exact_commands": 14,
+  "own_exact_matching_declared_version": 9
+ },
+ "mcp_remote": {
+  "repos": 17,
+  "commands": 17,
+  "repo_floating": {
+   "value": "17/17 (100.0%)",
+   "ci95_wilson": [
+    81.6,
+    100
+   ]
+  }
+ },
+ "largest_repo_commands": 116,
+ "commands_median_per_repo": 1,
+ "hand_check_sample": {
+  "seed": 20261020,
+  "size": 60,
+  "rows_in_commands_csv": [
+   21,
+   27,
+   30,
+   31,
+   50,
+   52,
+   64,
+   65,
+   66,
+   70,
+   99,
+   102,
+   140,
+   183,
+   184,
+   188,
+   227,
+   231,
+   248,
+   272,
+   302,
+   307,
+   345,
+   348,
+   354,
+   358,
+   396,
+   398,
+   405,
+   409,
+   438,
+   446,
+   458,
+   471,
+   480,
+   493,
+   505,
+   527,
+   534,
+   536,
+   549,
+   564,
+   568,
+   574,
+   592,
+   614,
+   625,
+   681,
+   698,
+   709,
+   713,
+   716,
+   734,
+   738,
+   742,
+   743,
+   752,
+   779,
+   820,
+   833
+  ]
+ }
+}

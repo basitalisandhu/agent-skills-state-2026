@@ -154,9 +154,10 @@ To explore the data instead, [`docs/querying-the-dataset.md`](docs/querying-the-
 | `data/trend.csv` | One row per month: key findings, denominators, seed, request counts and notes |
 | `charts/` | The three first-edition charts and `trend.png` |
 | `scripts/` | Collection, fetch, scan and analysis scripts, `run_month.py` and `plot_trend.py` for the monthly run, and `check_numbers.py` |
-| `docs/` | The follow-up report on MCP tool annotations, worked examples of querying the dataset, and how the monthly run works |
+| `docs/` | The follow-up reports on MCP tool annotations and on README install pins, worked examples of querying the dataset, and how the monthly run works |
 | `data/2026-10/annotations/` | The tool annotation report's data: `results.json` (every number, with intervals), `tools.csv` (one row per tool), `repos.csv` (one row per selected repository, with the fetched commit) and `hand-check.csv` |
-| `tests/` | Tests for `run_month.py` and for the tool annotation scripts, with fixtures |
+| `data/2026-10/readme-pins/` | The README install pins report's data: `results.json` (every number, with intervals), `commands.csv` (one row per launch command), `repos.csv` (one row per selected repository, with the fetched commit) and `hand-check.csv` |
+| `tests/` | Tests for `run_month.py`, the tool annotation scripts and the README install pin scripts, with fixtures |
 | `METHOD.md` | Full method |
 
 ## Responsible disclosure
@@ -169,9 +170,11 @@ Cite the repository with the metadata in [`CITATION.cff`](CITATION.cff) (GitHub 
 
 > Ali, M. B. (2026). *The state of public agent skills and MCP servers, October 2026* (Version 1.0.0) [Data set and report]. https://github.com/basitalisandhu/agent-skills-state-2026
 
-For the follow-up report:
+For the follow-up reports:
 
 > Ali, M. B. (2026). *Do MCP servers say which tools are safe? Tool annotations in 304 public servers, October 2026* (Version 1.1.0) [Data set and report]. https://github.com/basitalisandhu/agent-skills-state-2026/blob/main/docs/mcp-tool-annotations.md
+
+> Ali, M. B. (2026). *Do MCP server READMEs tell you which version to run? Install pins in 264 public servers, October 2026* (Version 1.2.0) [Data set and report]. https://github.com/basitalisandhu/agent-skills-state-2026/blob/main/docs/mcp-readme-install-pins.md
 
 ## Related datasets
 

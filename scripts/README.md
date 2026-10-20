@@ -88,3 +88,15 @@ python -m pytest -q tests/test_annotations.py      # offline, fixtures only
 ```
 
 `hand-check.csv` in the same folder is written by hand, not by the script.
+
+## Follow-up: README install pins
+
+`readme_pins_fetch.py` and `readme_pins.py` produce [`docs/mcp-readme-install-pins.md`](../docs/mcp-readme-install-pins.md) from the same 399 repositories. Standard library only; the fetch needs `git` and network access, the analysis needs neither.
+
+```sh
+python scripts/readme_pins_fetch.py /tmp/pins      # re-fetch READMEs and server.json files at the dataset commits
+python scripts/readme_pins.py /tmp/pins            # write data/2026-10/readme-pins/{results.json,commands.csv,repos.csv}
+python -m pytest -q tests/test_readme_pins.py      # offline, fixtures only
+```
+
+`hand-check.csv` in the same folder is written by hand from the sample rows listed in `results.json`.

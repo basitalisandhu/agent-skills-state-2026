@@ -6,9 +6,22 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-10-20
+
+A new measure: version pins in MCP server READMEs. No number published in 1.0.0 or 1.1.0 changes.
+
 ### Added
 
+- `docs/mcp-readme-install-pins.md`: the follow-up report "Do MCP server READMEs tell you which version to run?", on whether the launch commands in the READMEs of the 399 sampled repositories that ship a `server.json` name an exact version, with denominators, 95% confidence intervals, a 60-command hand check, a "what to check before you install" list and limitations.
+- `scripts/readme_pins_fetch.py` (re-fetches those repositories' READMEs and `server.json` files at the dataset's commits, nothing executed) and `scripts/readme_pins.py` (static extraction and classing of launch commands, standard library only).
+- `data/2026-10/readme-pins/`: `results.json`, `commands.csv`, `repos.csv` and `hand-check.csv`.
+- `tests/test_readme_pins.py` with fixtures for JSON, TOML, YAML and shell forms, and a check that every share in the report matches `results.json`.
+- A README section, a `METHOD.md` section and a citation for the report; `CITATION.cff` is now version 1.2.0.
 - A "Related datasets" section in the README linking the RugSnare drift-watch corpus, and a note on dependency drift in `docs/mcp-tool-annotations.md`.
+
+### Changed
+
+- `scripts/annotations_fetch.py`: `one()` takes an optional list of sparse-checkout patterns, so the README fetch can reuse it. Its default behaviour is unchanged.
 
 ## [1.1.0] - 2026-10-16
 

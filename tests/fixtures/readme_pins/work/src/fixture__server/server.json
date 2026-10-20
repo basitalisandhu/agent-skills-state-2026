@@ -1,0 +1,3 @@
+{"name": "io.github.fixture/server", "version": "1.4.2",
+ "packages": [{"registryType": "npm", "identifier": "@fixture/server", "version": "1.4.2", "transport": {"type": "stdio"}},
+              {"registryType": "pypi", "identifier": "Fixture_MCP", "version": "0.3.1"}]}

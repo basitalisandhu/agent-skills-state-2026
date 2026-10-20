@@ -1,0 +1,61 @@
+sample_index,commands_csv_row,repo,file,line,launcher,package,version,pin_class,is_run_instruction,is_mcp_server_launch,pin_class_correct,note
+0,21,CSOAI-ORG/cobol-bridge-mcp,README.md,30,uvx,cobol-bridge-mcp,,unpinned,yes,yes,yes,config block; no version
+1,27,Chaixueyuan/weapp-agent-mcp,README.md,68,npx,@chaixueyuan/weapp-agent-mcp,,unpinned,yes,yes,yes,config block; no version
+2,30,Codeturion/codesurface,README.md,29,uvx,codesurface,,unpinned,yes,yes,yes,config block; no version
+3,31,ConnorBritain/mssql-mcp-reader,README.md,64,npx,@connorbritain/mssql-mcp-reader,latest,latest,yes,yes,yes,config block; explicit moving tag
+4,50,Elpolakos/lab-instrument-mcps,servers/chemistry/ocean-spectrometer/README.md,29,uvx,seabreeze,,unpinned,yes,no,yes,"driver setup step run with uvx, not the MCP server; version class right"
+5,52,Elpolakos/lab-instrument-mcps,servers/chemistry/sartorius-balance/README.md,47,uvx,labmcp-sartorius,,unpinned,yes,yes,yes,config block; no version
+6,64,Elpolakos/lab-instrument-mcps,servers/physics/pfeiffer-vacuum-gauge/README.md,51,uvx,labmcp-pfeiffer-tpg,,unpinned,yes,yes,yes,config block; no version
+7,65,Elpolakos/lab-instrument-mcps,servers/physics/srs-lockin/README.md,52,uvx,labmcp-srs-lockin,,unpinned,yes,yes,yes,config block; no version
+8,66,Elpolakos/lab-instrument-mcps,servers/physics/srs-rga/README.md,52,uvx,labmcp-srs-rga,,unpinned,yes,yes,yes,config block; no version
+9,70,Elpolakos/lab-instrument-mcps,servers/protocols/scpi-instrument/README.md,56,uvx,labmcp-scpi,,unpinned,yes,yes,yes,config block; no version
+10,99,JonathanRReed/Apple-MCPs,AppleFiles-MCP/README.md,61,uvx,apple-files-mcp,,unpinned,yes,yes,yes,config block; no version
+11,102,JonathanRReed/Apple-MCPs,AppleNotes-MCP/README.md,62,uvx,apple-mcp-notes,,unpinned,yes,yes,yes,config block; no version
+12,140,K-Dense-AI/lab-instrument-mcps,servers/chemistry/ocean-spectrometer/README.md,29,uvx,seabreeze,,unpinned,yes,no,yes,"driver setup step run with uvx, not the MCP server; version class right"
+13,183,TheNextGenNexus/ecommerce-mcp-servers,README.md,22,npx,@nexgendata/redfin-mcp-server,,unpinned,yes,yes,yes,shell line or inline code; no version
+14,184,TheNextGenNexus/ecommerce-mcp-servers,README.md,30,npx,@nexgendata/real-estate-mcp-server,,unpinned,yes,yes,yes,shell line or inline code; no version
+15,188,WaterTian/wechat-devtools-mcp,README.md,70,uvx,wechat-devtools-mcp,,unpinned,yes,yes,yes,config block; no version
+16,227,arhancanli/mcp-factory,README.md,64,npx,vuln-priority-mcp,,unpinned,yes,yes,yes,shell line or inline code; no version
+17,231,arifulislamat/database-mcp,README.md,60,npx,@database-mcp/sqlite,,unpinned,yes,yes,yes,config block; no version
+18,248,cartesiancs/cartcut,README.md,107,npx,@cartesiancs/cartcut-mcp,,unpinned,yes,yes,yes,shell line or inline code; no version
+19,272,codespar/mcp-dev-latam,packages/banking/dock/README.md,40,npx,@codespar/mcp-dock,,unpinned,yes,yes,yes,config block; no version
+20,302,codespar/mcp-dev-latam,packages/ecommerce/amazon/README.md,93,npx,@codespar/mcp-amazon,,unpinned,yes,yes,yes,shell line or inline code; no version
+21,307,codespar/mcp-dev-latam,packages/ecommerce/vtex/README.md,18,npx,@codespar/mcp-vtex,,unpinned,yes,yes,yes,config block; no version
+22,345,codespar/mcp-dev-latam,packages/payments/khipu/README.md,67,npx,@codespar/mcp-khipu,,unpinned,yes,yes,yes,shell line or inline code; no version
+23,348,codespar/mcp-dev-latam,packages/payments/mercado-libre/README.md,16,npx,@codespar/mcp-mercado-libre,,unpinned,yes,yes,yes,config block; no version
+24,354,codespar/mcp-dev-latam,packages/payments/pagbrasil/README.md,18,npx,@codespar/mcp-pagbrasil,,unpinned,yes,yes,yes,config block; no version
+25,358,codespar/mcp-dev-latam,packages/payments/pix-bcb/README.md,18,npx,@codespar/mcp-pix-bcb,,unpinned,yes,yes,yes,config block; no version
+26,396,cyanheads/toolkit-mcp-server,README.md,144,bunx,@cyanheads/toolkit-mcp-server,latest,latest,yes,yes,yes,config block; explicit moving tag
+27,398,cyanheads/toolkit-mcp-server,README.md,180,docker run,ghcr.io/cyanheads/toolkit-mcp-server,latest,latest,yes,yes,yes,config block; explicit moving tag
+28,405,davidmosiah/strava-mcp,README.md,139,npx,strava-mcp-unofficial,,unpinned,yes,yes,yes,config block; no version
+29,409,daxm/fmpsdk,mcp/README.md,57,uvx,github.com/daxm/fmpsdk,,unpinned,yes,yes,yes,"uvx --from git+ URL at a branch (master), so it floats"
+30,438,fastslack/mtw-e2e-runner,README.md,191,npx,@matware/e2e-runner,latest,latest,yes,yes,yes,npx -p pkg@latest; a comment line above it is skipped
+31,446,giancarloerra/SocratiCode,README.md,98,npx,socraticode,latest,latest,yes,yes,yes,config with --prefer-online and @latest
+32,458,isakskogstad/Riksdag-Regering-MCP,README.md,44,npx,@isak.skogstad/riksdag-regering-mcp,,unpinned,yes,yes,yes,config block; no version
+33,471,kunwar-shah/claudex,README.md,150,npx,@kunwarshah/claudex,,unpinned,yes,yes,yes,starts the package that server.json declares as the server
+34,480,lzy18001500226/MoSim,Docs/Skills/Playwright-MCP/README.md,38,npx,@playwright/mcp,latest,latest,yes,yes,yes,config block; explicit moving tag
+35,493,mbailey/voicemode,README.md,55,uvx,voice-mode-install,,unpinned,yes,no,yes,"installer for the server, run with uvx; version class right"
+36,505,mihnin/stellara-mcp,README.md,85,npx,stellara-mcp,,unpinned,yes,yes,yes,config block; no version
+37,527,mindstone/mcp-servers,connectors/microsoft-sharepoint/README.md,70,npx,@mindstone/mcp-server-microsoft-sharepoint,,unpinned,yes,yes,yes,config block; no version
+38,534,mindstone/mcp-servers,connectors/openai-image/README.md,76,npx,@mindstone/mcp-server-openai-image,,unpinned,yes,yes,yes,config block; no version
+39,536,mindstone/mcp-servers,connectors/outreach/README.md,21,npx,@mindstone/mcp-server-outreach,,unpinned,yes,yes,yes,config block; no version
+40,549,mindstone/mcp-servers,connectors/xero/README.md,25,npx,@mindstone/mcp-server-xero,,unpinned,yes,yes,yes,config block; no version
+41,564,nirholas/universal-crypto-mcp,packages/defi/protocols/packages/data/crypto-data-aggregator/README.md,193,npx,crypto-news,,unpinned,yes,no,yes,"a news CLI from a package in the same monorepo, not an MCP server launch"
+42,568,nirholas/universal-crypto-mcp,packages/defi/protocols/packages/tools/lyra-intel/README.md,338,npx,lyra-intel-mcp,,unpinned,yes,yes,yes,config block; no version
+43,574,nubiia-dev/mcp-hubspot,README.md,104,npx,@nubiia/mcp-hubspot,,unpinned,yes,yes,yes,config block; no version
+44,592,parasxos/apple-mail-mcp,README.md,159,uvx,apple-mailbox-mcp,,unpinned,yes,yes,yes,config block; no version
+45,614,pulsemcp/mcp-servers,experimental/pointsyeah/README.md,58,npx,pointsyeah-mcp-server,,unpinned,yes,yes,yes,config block; no version
+46,625,pulsemcp/mcp-servers,productionized/svg-tracer/README.md,22,npx,@pulsemcp/svg-tracer-mcp-server,,unpinned,yes,yes,yes,config block; no version
+47,681,theYahia/WWmcp,README.md,54,npx,@theyahia/cdek-mcp,,unpinned,yes,yes,yes,config block; no version
+48,698,theYahia/WWmcp,servers/getcourse/README.md,19,npx,@theyahia/getcourse-mcp,,unpinned,yes,yes,yes,config block; no version
+49,709,theYahia/WWmcp,servers/payme/README.md,21,npx,@theyahia/payme-mcp,,unpinned,yes,yes,yes,config block; no version
+50,713,theYahia/WWmcp,servers/robokassa/README.md,19,npx,@theyahia/robokassa-mcp,,unpinned,yes,yes,yes,config block; no version
+51,716,theYahia/WWmcp,servers/salutespeech/README.md,18,npx,@theyahia/salutespeech-mcp,,unpinned,yes,yes,yes,config block; no version
+52,734,theluckystrike/mcp-servers,servers/change-order/README.md,37,npx,@theluckystrike/mcp-change-order,,unpinned,yes,yes,yes,config block; no version
+53,738,theluckystrike/mcp-servers,servers/currency/README.md,28,npx,@theluckystrike/mcp-currency,,unpinned,yes,yes,yes,config block; no version
+54,742,theluckystrike/mcp-servers,servers/dunning-letters/README.md,22,npx,@theluckystrike/mcp-dunning-letters,,unpinned,yes,yes,yes,config block; no version
+55,743,theluckystrike/mcp-servers,servers/expense-tracker/README.md,25,npx,@theluckystrike/mcp-expense-tracker,,unpinned,yes,yes,yes,config block; no version
+56,752,theluckystrike/mcp-servers,servers/office-suite/README.md,26,npx,@theluckystrike/mcp-office-suite,,unpinned,yes,yes,yes,config block; no version
+57,779,thomasxm/CrowdSentinels-AI-MCP,README.md,112,uvx,crowdsentinel-mcp-server-es9,,unpinned,yes,yes,yes,shell line or inline code; no version
+58,820,yangzhuxinyzx/auto-openclaw,packages/agent-infra/mcp-servers/commands/README.md,56,npx,@agent-infra/mcp-server-commands,,unpinned,yes,yes,yes,shell line or inline code; no version
+59,833,zz-plant/ambit,README.md,23,npx,ambit-cli,,unpinned,yes,yes,yes,shell line or inline code; no version

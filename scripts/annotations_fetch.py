@@ -31,7 +31,7 @@ def run(args, cwd=None, t=240):
     return subprocess.run(args, cwd=cwd, capture_output=True, text=True, timeout=t, env=ENV)
 
 
-def one(src, full, sha):
+def one(src, full, sha, patterns=None):
     dest = os.path.join(src, full.replace("/", "__"))
     meta = os.path.join(dest, ".fetched.json")
     if os.path.exists(meta):
@@ -41,7 +41,7 @@ def one(src, full, sha):
     try:
         run(["git", "init", "-q"], cwd=dest)
         run(["git", "remote", "add", "origin", f"https://github.com/{full}.git"], cwd=dest)
-        run(["git", "sparse-checkout", "set", "--no-cone", *PATTERNS], cwd=dest)
+        run(["git", "sparse-checkout", "set", "--no-cone", *(patterns or PATTERNS)], cwd=dest)
         state = "pinned"
         r = run(["git", *SAFE, "fetch", "-q", "--depth", "1", "--filter=blob:none", "origin", sha], cwd=dest)
         if r.returncode:

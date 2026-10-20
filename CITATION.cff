@@ -8,13 +8,14 @@ abstract: >-
   open-source tools on 13 October 2026, with hand-checked precision for each
   measure. Dataset, method, scripts and charts. Version 1.1.0 adds a follow-up
   report on MCP tool annotations in the 399 sampled repositories that ship a
-  server.json.
+  server.json. Version 1.2.0 adds a follow-up report on whether the launch
+  commands in those repositories' READMEs pin an exact version.
 authors:
   - family-names: Ali
     given-names: Muhammad Basit
     alias: basitalisandhu
-version: 1.1.0
-date-released: "2026-10-16"
+version: 1.2.0
+date-released: "2026-10-20"
 license: CC-BY-4.0
 repository-code: "https://github.com/basitalisandhu/agent-skills-state-2026"
 url: "https://basitalisandhu.github.io/posts/the-state-of-public-agent-skills-and-mcp-servers/"
@@ -26,3 +27,4 @@ keywords:
   - AI agent security
   - dataset
   - tool annotations
+  - version pinning
