@@ -1,0 +1,61 @@
+sample_index,skills_csv_row,repo,skill_md,grant_is_unscoped_bash,shell_on_page,shell_on_page_correct,heads_class,heads_class_correct,flags_found,flags_wrong,flags_missed,note
+0,15,12505011/agent-workspace,Auto-claude-code-research-in-sleep-main/skills/rebuttal/SKILL.md,yes,no,yes,none,n/a,,,,no shell command and no script on the page
+1,40,16Miku/academic-skill-eval,evaluations/full-paper-workflow-stack/skill/upstream/claude-scientific-writer/scientific_writer/.claude/skills/venue-templates/SKILL.md,yes,yes,yes,gt3,yes,,,,
+2,82,Abhiman1206/obsidian-prism,antigravity-awesome-skills/skills/seo-competitor-pages/SKILL.md,yes,no,yes,none,n/a,,,,"inline code spans are search phrases, not commands"
+3,186,BrightBlock/hyprlayer-cli,assets/claude/skills/validate_plan/SKILL.md,yes,no,yes,none,n/a,,,,no command on the page; prose asks the agent to inspect the git diff
+4,259,CodySwannGT/api-creator,.opencode/skills/lisa/lisa-nightly-lower-code-complexity/SKILL.md,yes,yes,yes,gt3,yes,installs_or_fetches_package pushes_or_publishes,,,npx prettier and gh pr create are real instructions
+5,479,Gustavosareto/gerenciador-de-quadras,.claude/skills/gsd-cleanup/SKILL.md,yes,no,yes,none,n/a,,,,no command; the workflow lives in a referenced file
+6,490,Gustavosareto/gerenciador-de-quadras,.github/skills/gsd-analyze-dependencies/SKILL.md,yes,no,yes,none,n/a,,,,no command; delegates to a referenced workflow file
+7,493,Gustavosareto/gerenciador-de-quadras,.github/skills/gsd-next/SKILL.md,yes,no,yes,none,n/a,,,,no command; delegates to a referenced workflow file
+8,494,Gustavosareto/gerenciador-de-quadras,.github/skills/gsd-set-profile/SKILL.md,yes,yes,yes,le3,yes,,,,"runs a tool from the plugin folder, outside the skill folder"
+9,534,Houseofmvps/ultraship,skills/retro/SKILL.md,yes,yes,yes,le3,yes,,,,"runs tools from the plugin folder, outside the skill folder"
+10,557,Iowa51/ChartSparkOG,.agent/workflows/awesome/vulnerability-scanner/SKILL.md,yes,yes,yes,le3,yes,evals_built_string,evals_built_string,,eval match is a regular expression string inside a code scanner
+11,566,Jeeva0104/connector-service-mini,.claude/skills/burpsuite-project-parser/SKILL.md,yes,yes,yes,gt3,yes,,,,a few flag names inside the shell fence counted as heads; class unchanged
+12,621,LING71671/Open-ClaudeCode,plugins/gstack-workflows/skills/gstack-qa-only/SKILL.md,yes,yes,yes,le3,yes,,,,
+13,698,MikeCheng1208/BattleTree,.agents/skills/adverse-media/SKILL.md,yes,yes,yes,le3,yes,,,,
+14,821,NextSpark-js/nextspark,.claude/skills/github/SKILL.md,yes,yes,yes,le3,yes,pushes_or_publishes,,,git push and gh pr create; a multi-line --body is joined to one command
+15,938,SamuelChien/mega-skills-collection,kafka-stream-processor/SKILL.md,yes,no,yes,none,n/a,,,,
+16,947,SamuelChien/mega-skills-collection,zapier-integration-helper/SKILL.md,yes,no,yes,none,n/a,,,,
+17,997,Sei-Yukinari/github-copilot-boilerplate,.github/skills/overview/SKILL.md,yes,no,yes,none,n/a,,,,
+18,1242,YYC-Cube/YYC3-Knowledge-Base,YYC3-F/code-skills/skills/colleague-skill/SKILL.md,yes,yes,yes,le3,yes,http_call deletes_recursively_or_force,,installs_or_fetches_package reads_credential_store,requests.post and shutil.rmtree are real; misses npx -y in a subprocess argument list on the next line and a read of the Chrome profile folder
+19,1290,a5c-ai/babysitter,library/specializations/ai-agents-conversational/skills/prompt-injection-detector/SKILL.md,yes,no,yes,none,n/a,,,,
+20,1293,a5c-ai/babysitter,library/specializations/domains/business/customer-experience/skills/escalation-workflow/SKILL.md,yes,no,yes,none,n/a,,,,
+21,1295,a5c-ai/babysitter,library/specializations/domains/business/decision-intelligence/skills/promethee-evaluator/SKILL.md,yes,no,yes,none,n/a,,,,
+22,1297,a5c-ai/babysitter,library/specializations/domains/business/project-management/skills/critical-path-analyzer/SKILL.md,yes,no,yes,none,n/a,,,,
+23,1299,a5c-ai/babysitter,library/specializations/domains/business/sales/skills/calendly-scheduling/SKILL.md,yes,no,yes,none,n/a,,,,
+24,1300,a5c-ai/babysitter,library/specializations/domains/science/computer-science/skills/model-checker-interface/SKILL.md,yes,no,yes,none,n/a,,,,
+25,1301,a5c-ai/babysitter,library/specializations/domains/science/materials-science/skills/polymer-characterization/SKILL.md,yes,no,yes,none,n/a,,,,
+26,1303,a5c-ai/babysitter,library/specializations/domains/science/scientific-discovery/skills/power-analysis-calculator/SKILL.md,yes,no,yes,none,n/a,,,,
+27,1307,a5c-ai/babysitter,library/specializations/web-development/skills/seo/SKILL.md,yes,no,yes,none,n/a,,,,
+28,1348,abuango/pos-ai,.claude/skills/project-creation/SKILL.md,yes,yes,yes,gt3,yes,,,,
+29,1474,arpadtamasi/health-ai,.claude/skills/gstack/sync-gbrain/SKILL.md,yes,yes,yes,gt3,yes,pushes_or_publishes evals_built_string,pushes_or_publishes,,git push appears only as a mention in inline code; the eval of a local helper is real
+30,1602,bg-szy/TOP-SKILLS,skills/marketplace/genvm-lint__skills-internet-court-internet-court-vendored-genlayer-genvm-lint/SKILL.md,yes,yes,yes,le3,yes,installs_or_fetches_package,,,pip install in a setup block
+31,1605,bg-szy/TOP-SKILLS,skills/marketplace/performance-profiling/SKILL.md,yes,yes,yes,le3,yes,,,,
+32,1615,bika11/SiloOS,.agent/skills/awesome/app-builder/SKILL.md,yes,no,yes,none,n/a,,,,
+33,1680,bryanzk/MyCodexEnv,codex/skills/gstack/plan-tune/SKILL.md,yes,yes,yes,gt3,yes,deletes_recursively_or_force evals_built_string,,,git rm -r in an uninstall step and eval of a local helper are real
+34,1724,buildomator/buildomator,skills/version/SKILL.md,yes,yes,yes,gt3,yes,,,,
+35,1865,danstrem2/clawdbot-skill-master-pack,skills/nextjs-react-expert/SKILL.md,yes,yes,yes,le3,yes,,,,
+36,1900,daryllundy/claude-skills-library,.claude/skills/test-specialist/SKILL.md,yes,no,yes,none,n/a,,,,
+37,2012,evanharmon1/harmon-devkit,ai/skills/repo/standardize-repo/SKILL.md,yes,yes,yes,gt3,yes,installs_or_fetches_package deletes_recursively_or_force evals_built_string,installs_or_fetches_package,,installs match is a grep pattern string; rm -rf in a trap and eval are real
+38,2024,fabioeducacross/DesignSystem-Vuexy,.claude/skills/neon-instagres/SKILL.md,yes,yes,yes,gt3,yes,installs_or_fetches_package reads_credential_store,,,npx get-db fetch-and-run; cat .env | grep DATABASE_URL
+39,2197,headmktlucca-ui/neuroads-lp,.agent/skills/import-art/SKILL.md,yes,yes,yes,gt3,yes,,,,two path-only lines counted as heads; class unchanged
+40,2307,infometa/workbuddyskills,connectors/beisen-cli/skills/beisen-service-portal/SKILL.md,yes,yes,yes,le3,yes,,,,one condition line counted as a head; class unchanged
+41,2313,infometa/workbuddyskills,experts/technical-documentation-engineer/skills/deep-research/research-add-fields/SKILL.md,yes,no,yes,none,n/a,,,,
+42,2421,javimosch/open-claw-skills,skills/itsnishi/audit-code/SKILL.md,yes,yes,yes,le3,yes,,,,
+43,2490,knownasnaffy/prompthound,dataset/case_03338/SKILL.md,yes,yes,yes,le3,yes,reads_credential_store,,,script reads .env and prints the values (a test-corpus case)
+44,2655,mattnicosia/bldg-skills,plugins/bldg-maker-school/skills/model-chat/SKILL.md,yes,yes,yes,le3,yes,,,,
+45,2660,mattnicosia/bldg-skills,plugins/bldg-maker-school/skills/video-to-action/SKILL.md,yes,yes,yes,le3,yes,,,,
+46,2728,micsapp/micstec-skills,claude-code/plugins-plus-skills/planned-skills/generated/04-security-advanced/security-benchmark-runner/SKILL.md,yes,no,yes,none,n/a,,,,
+47,2739,micsapp/micstec-skills,claude-code/plugins-plus-skills/planned-skills/generated/17-technical-docs/faq-generator/SKILL.md,yes,no,yes,none,n/a,,,,
+48,2893,nota-america/forgecat-agent-profiles,profiles/garrytan/gstack/for-forgecat/platforms/claude-code/.claude/skills/garrytan_gstack_careful/SKILL.md,yes,yes,yes,le3,yes,,,,
+49,2903,nota-america/forgecat-agent-profiles,profiles/zubair-trabzada/geo-seo-claude/for-forgecat/skills/geo-technical/SKILL.md,yes,yes,yes,le3,yes,http_call,,,curl against the audited URL
+50,2956,om-scogo/skillsh-scraper,data/skills/idanbeck-claude-skills/gmail-skill/gmail-skill/SKILL.md,yes,yes,yes,le3,yes,installs_or_fetches_package,,,pip install in setup instructions
+51,3050,psd401/psd-claude-plugins,plugins/psd-productivity/skills/board-policy-formatter/SKILL.md,yes,yes,yes,le3,yes,http_call,,,urllib download of a PDF
+52,3343,sontek/sontek-skills,plugins/sontek-skills/skills/review-code/SKILL.md,yes,yes,yes,le3,yes,,,,
+53,3361,spl-tele/Claude_Skills,external-skills/community/aitmpl/development/tdd-workflow/SKILL.md,yes,no,yes,none,n/a,,,,
+54,3427,tonone-ai/tonone,bundle/full-team/skills/lens-audit/SKILL.md,yes,no,yes,none,n/a,,,,no command; prose asks for git log and git blame
+55,3429,tonone-ai/tonone,bundle/product-team/skills/lumen-metrics/SKILL.md,yes,no,yes,none,n/a,,,,
+56,3431,tonone-ai/tonone,skills/deploy-recon/SKILL.md,yes,no,yes,none,n/a,,,,
+57,3432,tonone-ai/tonone,skills/keep-onboard/SKILL.md,yes,yes,yes,le3,yes,,,,
+58,3487,unfallenwill/skills,plugins/pandas-copilot/skills/pandas-copilot/SKILL.md,yes,yes,yes,none,n/a,,,,
+59,3584,wonecosystem/2300-skills,packs/global-skillshare-import/wave-011/supply-chain-risk-auditor/SKILL.md,yes,no,yes,none,n/a,,,,no command; prose asks for gh and npm audit

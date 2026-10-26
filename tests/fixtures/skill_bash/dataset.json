@@ -1,0 +1,6 @@
+[
+ {"repo": "fixture/skills", "commit": "aaaa", "stars": 120, "any_unrestricted_bash": true},
+ {"repo": "fixture/moved", "commit": "bbbb", "stars": 3, "any_unrestricted_bash": true},
+ {"repo": "fixture/gone", "commit": "cccc", "stars": 0, "any_unrestricted_bash": true},
+ {"repo": "fixture/none", "commit": "dddd", "stars": 9, "any_unrestricted_bash": false}
+]

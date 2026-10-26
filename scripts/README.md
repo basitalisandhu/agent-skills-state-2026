@@ -100,3 +100,15 @@ python -m pytest -q tests/test_readme_pins.py      # offline, fixtures only
 ```
 
 `hand-check.csv` in the same folder is written by hand from the sample rows listed in `results.json`.
+
+## Follow-up: what skills with unscoped Bash do
+
+`skill_bash_fetch.py` and `skill_bash.py` produce [`docs/skills-with-unscoped-bash.md`](../docs/skills-with-unscoped-bash.md) from the 400 repositories (of 407) with a skill that grants unscoped Bash. Standard library only; the fetch needs `git` and network access, the analysis needs neither. The fetch writes blobs by object id and never checks out a working tree.
+
+```sh
+python scripts/skill_bash_fetch.py /tmp/bash      # re-fetch SKILL.md files and bundled files at the dataset commits
+python scripts/skill_bash.py /tmp/bash            # write data/2026-10/skill-bash/{results.json,skills.csv,repos.csv}
+python -m pytest -q tests/test_skill_bash.py      # offline, fixtures only
+```
+
+`hand-check.csv` in the same folder is written by hand from the sample rows listed in `results.json`.

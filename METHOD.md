@@ -119,3 +119,7 @@ On 16 October 2026 the 399 repositories in this sample with a `server.json` were
 ## 11. Follow-up: README install pins (version 1.2.0)
 
 On 20 October 2026 the same 399 repositories were re-fetched at the commits in `data/2026-10/dataset.json`, README and `server.json` files only, and every launch command in their READMEs (`npx`, `bunx`, `pnpm dlx`, `yarn dlx`, `uvx`, `uv tool run`, `pipx run`, `docker run`) was classed as exact, range, latest or unpinned. Nothing was run. The selection, patterns, exclusions, version classes, intervals, hand check and limitations are in [`docs/mcp-readme-install-pins.md`](docs/mcp-readme-install-pins.md); the data is in `data/2026-10/readme-pins/`. It changes no number in sections 1 to 10.
+
+## 12. Follow-up: what skills with unscoped Bash do (version 1.3.0)
+
+On 26 October 2026, 400 of the 407 repositories with `any_unrestricted_bash` true were re-fetched at the commits in `data/2026-10/dataset.json`, `SKILL.md` files and the files bundled with up to 20 unscoped-Bash skills a repository only, and each skill's shell commands, distinct command heads and nine riskier behaviours were read statically. Nothing was run. The selection, rules, intervals, hand check and limitations are in [`docs/skills-with-unscoped-bash.md`](docs/skills-with-unscoped-bash.md); the data is in `data/2026-10/skill-bash/`. It changes no number in sections 1 to 11.

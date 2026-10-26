@@ -6,6 +6,18 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-10-26
+
+A new measure: what skills that grant unscoped Bash do with it. No number published in 1.0.0, 1.1.0 or 1.2.0 changes.
+
+### Added
+
+- `docs/skills-with-unscoped-bash.md`: the follow-up report "What do skills that ask for the whole shell do with it?", on 3,715 skills that grant unscoped Bash in 392 sampled repositories: how many show no shell command and ship no script, how many need three or fewer distinct commands, and how many install packages, call the network, delete recursively, `eval`, push or publish, pipe downloads into a shell, use `sudo`, read credentials or change system configuration. With denominators, 95% confidence intervals, a 60-skill hand check, a "what to check before you install" list and limitations.
+- `scripts/skill_bash_fetch.py` (re-fetches `SKILL.md` files and bundled files at the dataset's commits by blob id, no checkout, nothing executed) and `scripts/skill_bash.py` (static extraction of commands, heads and behaviours, standard library only).
+- `data/2026-10/skill-bash/`: `results.json`, `skills.csv`, `repos.csv` and `hand-check.csv`.
+- `tests/test_skill_bash.py` with fixtures, and a check that every share in the report matches `results.json`.
+- A README section, a `METHOD.md` section and a citation for the report; `CITATION.cff` is now version 1.3.0. The README also gains a short section for the README install pins report, which was linked only from the layout table and citations.
+
 ## [1.2.0] - 2026-10-20
 
 A new measure: version pins in MCP server READMEs. No number published in 1.0.0 or 1.1.0 changes.

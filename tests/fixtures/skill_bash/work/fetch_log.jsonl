@@ -1,0 +1,3 @@
+{"repo": "fixture/skills", "state": "pinned", "sha": "aaaa", "n_skill_md": 4, "n_skill_md_read": 4, "n_unscoped": 3, "skills": [{"skill_md": "skills/net/SKILL.md", "files": ["skills/net/scripts/run.py", "skills/net/notes.md"], "truncated": false}, {"skill_md": "skills/quiet/SKILL.md", "files": [], "truncated": false}, {"skill_md": "skills/scoped/SKILL.md", "files": [], "truncated": false}, {"skill_md": "skills/sys/SKILL.md", "files": ["skills/sys/scripts/setup.sh"], "truncated": false}]}
+{"repo": "fixture/moved", "state": "moved", "sha": "eeee", "n_skill_md": 2, "n_skill_md_read": 2, "n_unscoped": 0, "skills": []}
+{"repo": "fixture/gone", "state": "unavailable"}

@@ -32,6 +32,14 @@ Each month is a new sample of what code search surfaces that month, so a change 
 
 **[Do MCP servers say which tools are safe?](docs/mcp-tool-annotations.md)** (16 October 2026) answers the question the first edition could not: whether MCP servers mark their tools with `readOnlyHint`, `destructiveHint`, `idempotentHint` and `openWorldHint`. It re-fetched the source of the 399 repositories in this sample that ship a `server.json`, at the commits in the dataset, and read the tool registrations without running anything. Of the 304 servers whose registrations could be read (17,688 tools in all), 188 (61.8%) annotate none of their tools and only 69 (22.7%) annotate every one. Of the 1,099 tools named for deleting, sending, paying or writing, 214 (19.5%) declare `destructiveHint: true`. Every share has its denominator and a 95% confidence interval; the data is in [`data/2026-10/annotations/`](data/2026-10/annotations/) and the scripts are `scripts/annotations_fetch.py` and `scripts/annotations.py`. No number in this first edition changes.
 
+## Follow-up report: README install pins
+
+**[Do MCP server READMEs tell you which version to run?](docs/mcp-readme-install-pins.md)** (20 October 2026) reads the launch commands in the READMEs of the same 399 repositories. Of the 264 whose READMEs contain one, 252 (95.5%) never name an exact version, and 69 (26.1%) ask for a moving tag such as `@latest`. The data is in [`data/2026-10/readme-pins/`](data/2026-10/readme-pins/).
+
+## Follow-up report: what skills with unscoped Bash do
+
+**[What do skills that ask for the whole shell do with it?](docs/skills-with-unscoped-bash.md)** (26 October 2026) follows up finding 4. It re-fetched 400 of the 407 repositories with a skill that grants unscoped `Bash`, at the commits in the dataset, and read up to 20 such skills in each (3,715 skills in 392 repositories) with their bundled scripts, without running anything. 1,109 of 3,715 (29.9%) show no shell command and ship no script, so the grant is unused on the page; of the 2,545 that show commands, 1,418 (55.7%) use three or fewer distinct commands and could be scoped with that many rules. 1,289 (34.7%) document or ship a riskier behaviour: installing packages (15.7%), direct HTTP calls (14.4%), recursive deletion (9.2%), `eval` (8.4%), pushing or publishing (5.0%), piping a download into a shell (2.0%), `sudo` (1.6%) or reading credentials (1.3%). Every share has its denominator and a 95% confidence interval, and the report ends with a list of what to check before installing such a skill. The data is in [`data/2026-10/skill-bash/`](data/2026-10/skill-bash/). No number in this first edition changes.
+
 ## Charts
 
 ![Share of repositories with each finding, from 82.0% with no SECURITY.md down to 3.5% with a hook that calls a non-local host](charts/chart1-prevalence.png)
@@ -154,10 +162,11 @@ To explore the data instead, [`docs/querying-the-dataset.md`](docs/querying-the-
 | `data/trend.csv` | One row per month: key findings, denominators, seed, request counts and notes |
 | `charts/` | The three first-edition charts and `trend.png` |
 | `scripts/` | Collection, fetch, scan and analysis scripts, `run_month.py` and `plot_trend.py` for the monthly run, and `check_numbers.py` |
-| `docs/` | The follow-up reports on MCP tool annotations and on README install pins, worked examples of querying the dataset, and how the monthly run works |
+| `docs/` | The follow-up reports on MCP tool annotations, on README install pins and on what skills with unscoped Bash do, worked examples of querying the dataset, and how the monthly run works |
 | `data/2026-10/annotations/` | The tool annotation report's data: `results.json` (every number, with intervals), `tools.csv` (one row per tool), `repos.csv` (one row per selected repository, with the fetched commit) and `hand-check.csv` |
 | `data/2026-10/readme-pins/` | The README install pins report's data: `results.json` (every number, with intervals), `commands.csv` (one row per launch command), `repos.csv` (one row per selected repository, with the fetched commit) and `hand-check.csv` |
-| `tests/` | Tests for `run_month.py`, the tool annotation scripts and the README install pin scripts, with fixtures |
+| `data/2026-10/skill-bash/` | The unscoped Bash report's data: `results.json` (every number, with intervals), `skills.csv` (one row per skill: grant, commands, heads, scripts and the first line each rule matched), `repos.csv` (one row per selected repository, with the fetched commit) and `hand-check.csv` |
+| `tests/` | Tests for `run_month.py`, the tool annotation scripts, the README install pin scripts and the unscoped Bash scripts, with fixtures |
 | `METHOD.md` | Full method |
 
 ## Responsible disclosure
@@ -175,6 +184,8 @@ For the follow-up reports:
 > Ali, M. B. (2026). *Do MCP servers say which tools are safe? Tool annotations in 304 public servers, October 2026* (Version 1.1.0) [Data set and report]. https://github.com/basitalisandhu/agent-skills-state-2026/blob/main/docs/mcp-tool-annotations.md
 
 > Ali, M. B. (2026). *Do MCP server READMEs tell you which version to run? Install pins in 264 public servers, October 2026* (Version 1.2.0) [Data set and report]. https://github.com/basitalisandhu/agent-skills-state-2026/blob/main/docs/mcp-readme-install-pins.md
+
+> Ali, M. B. (2026). *What do skills that ask for the whole shell do with it? Unscoped Bash in 3,715 public skills, October 2026* (Version 1.3.0) [Data set and report]. https://github.com/basitalisandhu/agent-skills-state-2026/blob/main/docs/skills-with-unscoped-bash.md
 
 ## Related datasets
 
