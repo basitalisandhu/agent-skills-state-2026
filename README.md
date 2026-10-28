@@ -190,6 +190,7 @@ For the follow-up reports:
 ## Related datasets
 
 - [RugSnare drift-watch corpus](https://github.com/Paraphern/rugsnare/blob/main/tools/drift-watch-corpus.json) (Paraphern, Apache-2.0): a public, machine-readable record of how the tool contracts of 28 npm-distributed MCP servers and two skills collections changed across released versions, with a [page per server](https://github.com/Paraphern/rugsnare/tree/main/docs/servers) giving the version window and a repro command. It measures what a pinned version later serves, which this study does not.
+- [HISTOR MCP tool-definition history, snapshot of 20 October 2026](https://doi.org/10.5281/zenodo.23512760) (alexar76, CC BY 4.0): daily reads and field-level changes of remote MCP tool definitions, plus sandboxed observations of npm and PyPI MCP package versions.
 
 ## Related tools
 
